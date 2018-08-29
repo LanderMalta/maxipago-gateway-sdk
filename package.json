@@ -1,5 +1,5 @@
 {
-  "name": "maxipago",
+  "name": "maxipago-gateway-sdk",
   "version": "0.1.0",
   "description": "Javascript lib for MaxiPago Gateway",
   "license": "MIT",

@@ -1,0 +1,41 @@
+{
+  "name": "maxipago",
+  "version": "0.1.0",
+  "description": "Javascript lib for MaxiPago Gateway",
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Lander Malta",
+      "email": "lander.malta@luizalabs.com.br",
+      "url": "https://github.com/LanderMalta-luizalabs"
+    }
+  ],
+  "homepage": "https://github.com/LanderMalta-luizalabs/maxipago-gateway-sdk",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LanderMalta-luizalabs/maxipago-gateway-sdk.git"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "main": "./lib/core/maxipago.js",
+  "engines": {
+    "node": ">= 0.10.x"
+  },
+  "scripts": {
+    "test": "node test/all.js"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "faker": "^4.1.0",
+    "moment": "^2.22.2",
+    "require-all": "^3.0.0",
+    "restify-clients": "^1.5.2",
+    "xml2js": ">=0.4.19"
+  },
+  "devDependencies": {
+    "mocha": "4.0.1",
+    "sinon": "4.1.3",
+    "proxyquire": "1.8.0"
+  }
+}

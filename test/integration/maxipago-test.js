@@ -8,12 +8,15 @@ var testMerchantId = process.env.MP_TEST_ID;
 var testMerchantKey = process.env.MP_TEST_KEY;
 
 describe('>> gateway requests', function () {
-  var start, count, itTimeout = 30000, mpGateway = null;
+  var start;
+  var count;
+  var itTimeout = 30000;
+  var mpGateway = null;
   this.timeout(itTimeout);
   before(function () {
     count = 0;
     start = moment();
-    mpGateway = new maxipago.Gateway(testMerchantId, testMerchantKey, true);
+    mpGateway = maxipago.buildGateway(testMerchantId, testMerchantKey, true);
   });
   beforeEach(function () {
     count++;
@@ -975,8 +978,8 @@ describe('>> gateway requests', function () {
             mpGateway.recurringPayment(
               recurringPayment,
               function (err, mp_err, data) {
-                var orderID = data.orderID,
-                  updateRecurringPayment = mockData.fakeUpdateRecurringPayment(orderID);
+                var orderID = data.orderID;
+                var updateRecurringPayment = mockData.fakeUpdateRecurringPayment(orderID);
 
                 /** update recurring payment **/
                 mpGateway.updateRecurringPayment(

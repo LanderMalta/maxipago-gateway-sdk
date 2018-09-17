@@ -25,7 +25,7 @@ var maxipago = require('maxipago-gateway-sdk');
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> GATEWAY
+>>>>>> GATEWAY
 ---
 ---
 ---
@@ -49,7 +49,8 @@ var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKEY, test);
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> CUSTOMERS
+
+>>>>>> CUSTOMERS
 ---
 ---
 ---
@@ -129,7 +130,7 @@ mpGateway.deleteCustomer(deleteCustomerJSON, function (err, mpErr, data) {
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> CARDS
+>>>>>> CARDS
 ---
 ---
 ---
@@ -182,7 +183,7 @@ mpGateway.deleteCard(deleteCardJSON, function (err, mpErr, data) {
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> PAYMENTS
+>>>>>> PAYMENTS
 ---
 ---
 ---
@@ -316,7 +317,7 @@ mpGateway.returnPayment(returnPaymentJSON, function (err, mpErr, data) {   //dat
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> RECURRING PAYMENTS
+>>>>>> RECURRING PAYMENTS
 ---
 ---
 ---

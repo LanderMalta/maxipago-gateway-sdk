@@ -33,7 +33,7 @@ This method build an gateway to make you able to make requests on maxiPago! plat
 ###### Params:
 * **maxiPagoID** = *your maxipago ID*
 * **maxiPagoKEY**= *your maxipago KEY.*
-* **maxiPagoEnv**= *set maxipago enviorement (true= maxiPagoEnv / false=production).* 
+* **maxiPagoEnv**= *set maxipago enviorement ('development' = call api.maxipago.net / 'production' = call api.maxipago.net).* 
 
 ###### Example:
 ```js

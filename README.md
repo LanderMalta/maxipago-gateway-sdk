@@ -39,7 +39,7 @@ This method build an gateway to make you able to make requests on maxiPago! plat
 ```js
 var maxiPagoID = 'MaxiPagoID';
 var maxiPagoKEY = 'MaxiPagoKEY';
-var test = true;
+var test = '';
 var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKEY, test);
 ``` 
 ---

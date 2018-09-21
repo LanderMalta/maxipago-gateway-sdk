@@ -16,7 +16,7 @@ describe('>> gateway requests', function () {
   before(function () {
     count = 0;
     start = moment();
-    mpGateway = maxipago.buildGateway(testMerchantId, testMerchantKey, true);
+    mpGateway = maxipago.buildGateway(testMerchantId, testMerchantKey, 'development');
   });
   beforeEach(function () {
     count++;

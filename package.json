@@ -1,6 +1,6 @@
 {
   "name": "maxipago-gateway-sdk",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Javascript lib for MaxiPago Gateway",
   "license": "MIT",
   "contributors": [

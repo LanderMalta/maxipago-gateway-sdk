@@ -2,13 +2,11 @@
 # maxiPago!- gateway SDK
 
 
-> NodeJS SDK for maxiPago! payment gateway.
+ NodeJS SDK for maxiPago! payment gateway.
 According to the [maxiPago! API Docs](http://developers.maxipago.com/apidocs/), this SDK performs the following actions:
-> 1. Receives JSON requests.
-> 2. Transforms JSON request into XML
-> 3. Communicate and process the request with maxiPago !.
-> 4. Transforms the XML result into JSON.
-> 5. Returns the received result in JSON format.
+ 1. Receive  maxiPago requests in JSON format and transform into XML format.
+ 3. Communicate and process the request with maxiPago! gateway.
+ 4. Returns the received maxiPago! XML result in JSON format.
 
 ### Installation 
 ```sh
@@ -18,16 +16,14 @@ $ npm install maxipago-gateway-sdk --save
 # Usage
 First import or require maxiPago! SDK library.
 ```js
-import maxipago from 'maxipago-gateway-sdk';
-or
 var maxipago = require('maxipago-gateway-sdk');
+or use EJS 6
+import maxipago from 'maxipago-gateway-sdk';
 ```
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> GATEWAY
----
----
+#### GATEWAY
 ---
 
 This method build an gateway to make you able to make requests on maxiPago! platform.
@@ -49,9 +45,7 @@ var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKEY, test);
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> CUSTOMERS
----
----
+#### CUSTOMERS
 ---
 ## Adding Customer
 
@@ -82,11 +76,12 @@ var addCustomerJSON =
   "dob": "06/26/2018",
   "sex": "M"
 };
-mpGateway.addCustomer(addCustomerJSON, function (err, mpErr, data) {
+mpGateway.addCustomer(addCustomerJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
-
+----
 ## Updating Customer
 
 This method update previously added customer on maxiPago! platform.
@@ -106,10 +101,12 @@ var updateCustomerJSON =
   "lastName": "Corwin updated",
   "customerId": "119679"
 };
-mpGateway.updateCustomer(updateCustomerJSON, function (err, mpErr, data) {
+mpGateway.updateCustomer(updateCustomerJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
+----
 ## Deleting Customer
 This method delete previously added customer on maxiPago! platform.
 ###### Method:
@@ -122,16 +119,15 @@ This method delete previously added customer on maxiPago! platform.
 ###### Example:
 ```js
 var deleteCustomerJSON = { customerId: '119679'};
-mpGateway.deleteCustomer(deleteCustomerJSON, function (err, mpErr, data) {
+mpGateway.deleteCustomer(deleteCustomerJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> CARDS
----
----
+#### CARDS
 ---
 ## Adding Card
 
@@ -153,11 +149,13 @@ var addCardJSON =
   "expirationYear": 2020,
   "billingName": "Corwin"
 };
-mpGateway.addCard(addCardJSON, function (err, mpErr, data) {
+mpGateway.addCard(addCardJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
 
+----
 ## Deleting Card
 
 This method delete an card previously added on maxiPago! platform.
@@ -175,16 +173,15 @@ var deleteCardJSON =
   "customerId": "119722",
   "token": "+adHuFvmSms="
 };
-mpGateway.deleteCard(deleteCardJSON, function (err, mpErr, data) {
+mpGateway.deleteCard(deleteCardJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> PAYMENTS
----
----
+#### PAYMENTS
 ---
 ## Auth
 
@@ -221,7 +218,8 @@ var authJSON =
     "customerToken": "119766"
   }
 };
-mpGateway.auth(authJSON, function (err, mpErr, data) {
+mpGateway.auth(authJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
@@ -244,10 +242,12 @@ var authJSON =
     "chargeTotal": "10.00"
   }
 };
-mpGateway.auth(authJSON, function (err, mpErr, data) {
+mpGateway.auth(authJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
+----
 ## Capture
 
 This method capture an sale authorization previously added on maxiPago! platform.
@@ -268,9 +268,12 @@ var captureJSON =
     "chargeTotal": "10.00"
   }
 }
-mpGateway.capture(captureJSON, function (err, mpErr, data) {   //data is maxiPago! response converted inf JSON format.
+mpGateway.capture(captureJSON, function (err, data) {  
+   //err is maxiPago! error message.
+   //data is maxiPago! response converted inf JSON format.
 });
 ```
+----
 ## Void
 
 This method void an previously capture requested on maxiPago! platform.
@@ -284,11 +287,12 @@ This method void an previously capture requested on maxiPago! platform.
 ###### Example:
 ```js
 var voidJSON = {transactionID: '2203293'};
-mpGateway.void(voidJSON, function (err, mpErr, data) {
+mpGateway.void(voidJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
-
+----
 ## Return Payment
 
 This method return an capture previously requested on maxiPago! platform.
@@ -310,15 +314,15 @@ var returnPaymentJSON =
   }
 };
 
-mpGateway.returnPayment(returnPaymentJSON, function (err, mpErr, data) {   //data is maxiPago! response converted inf JSON format.
+mpGateway.returnPayment(returnPaymentJSON, function (err, data) {
+   //err is maxiPago! error message.
+   //data is maxiPago! response converted inf JSON format.
 });
 ```
 ---
 ---
 ---
->>>>>>>>>>>>>>>>>>> RECURRING PAYMENTS
----
----
+#### RECURRING PAYMENTS
 ---
 ## Adding Recurring Payment
 
@@ -381,7 +385,8 @@ var recurringPaymentJSON =
     "failureThreshold": "5"
   }
 };
-mpGateway.recurringPayment(recurringPaymentJSON, function (err, mpErr, data) {
+mpGateway.recurringPayment(recurringPaymentJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
@@ -434,10 +439,12 @@ var recurringPaymentJSON =
     "failureThreshold": "5"
   }
 }
-mpGateway.recurringPayment(recurringPaymentJSON, function (err, mpErr, data) {
+mpGateway.recurringPayment(recurringPaymentJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
+----
 ## Updating Recurring Payment
 This method update an recurring payment  previously added maxiPago! platform.
 ###### Method:
@@ -486,10 +493,12 @@ var updateRecurringPaymentJSON =
     "phone": "801.057.6041"
   }
 };
-mpGateway.void(updateRecurringPaymentJSON, function (err, mpErr, data) {
+mpGateway.void(updateRecurringPaymentJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
+----
 ## Canceling Recurring Payment
 This method cancel an previously recurring payment added on maxiPago! platform.
 ###### Method:
@@ -502,10 +511,14 @@ This method cancel an previously recurring payment added on maxiPago! platform.
 ###### Example:
 ```js
 var cancelRecurringPaymentJSON = {"orderID":"0A0104A3:0165A0AC8533:9B78:5B51BACC"};
-mpGateway.cancelRecurringPayment(cancelRecurringPaymentJSON, function (err, mpErr, data) {
+mpGateway.cancelRecurringPayment(cancelRecurringPaymentJSON, function (err, data) {
+   //err is maxiPago! error message.
    //data is maxiPago! response converted in JSON format.
 });
 ```
+----
+----
+----
 
 # License
 MIT

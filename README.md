@@ -28,19 +28,19 @@ import maxipago from 'maxipago-gateway-sdk';
 
 This method build an gateway to make you able to make requests on maxiPago! platform.
 ###### Method:
-* **.builtGateway(*maxiPagoID*, *maxiPagoKEY*, *test*)**
+* **.builtGateway(*maxiPagoID*, *maxiPagoKEY*, *maxiPagoEnv*)**
 
 ###### Params:
 * **maxiPagoID** = *your maxipago ID*
 * **maxiPagoKEY**= *your maxipago KEY.*
-* **test**= *set maxipago enviorement (true= test / false=production).* 
+* **maxiPagoEnv**= *set maxipago enviorement (true= maxiPagoEnv / false=production).* 
 
 ###### Example:
 ```js
 var maxiPagoID = 'MaxiPagoID';
 var maxiPagoKEY = 'MaxiPagoKEY';
-var test = '';
-var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKEY, test);
+var maxiPagoEnv = '';
+var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKEY, maxiPagoEnv);
 ``` 
 ---
 ---

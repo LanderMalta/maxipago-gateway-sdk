@@ -29,6 +29,33 @@ describe('>> gateway requests', function () {
   });
 
   describe('customer', function () {
+    it('NEW add customer basic data', function (done) {
+      var client = mockData.fakeClient();
+
+      /** add client **/
+      mpGateway.addCustomer2(
+        client,
+        function (err, data) {
+          assert.ok(!err);
+          assert.equal(data.errorCode, '0');
+          assert.equal(data.errorMessage, '');
+          assert.equal(data.command, 'add-consumer');
+          assert.ok(data.hasOwnProperty('result'));
+          assert.ok(data.result.hasOwnProperty('customerId'));
+          var deleteCustomer = mockData.fakeDeleteCustomer(data.result.customerId);
+
+          /** delete client **/
+          mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
+            assert.ok(!err);
+            assert.equal(data.errorCode, '0');
+            assert.equal(data.errorMessage, '');
+            assert.equal(data.command, 'delete-consumer');
+            assert.ok(data.hasOwnProperty('result'));
+            assert.equal(data.result, '');
+            done();
+          });
+        });
+    });
     it('add customer basic data', function (done) {
       var client = mockData.fakeClient();
 
@@ -64,7 +91,7 @@ describe('>> gateway requests', function () {
         client,
         function (err, data) {
           assert.ok(!err);
-          
+
           assert.equal(data.errorCode, '0');
           assert.equal(data.errorMessage, '');
           assert.equal(data.command, 'add-consumer');
@@ -75,7 +102,7 @@ describe('>> gateway requests', function () {
           /** delete client **/
           mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.errorCode, '0');
             assert.equal(data.errorMessage, '');
             assert.equal(data.command, 'delete-consumer');
@@ -97,7 +124,7 @@ describe('>> gateway requests', function () {
         unordered_client,
         function (err, data) {
           assert.ok(!err);
-          
+
           assert.equal(data.errorCode, '0');
           assert.equal(data.errorMessage, '');
           assert.equal(data.command, 'add-consumer');
@@ -108,7 +135,7 @@ describe('>> gateway requests', function () {
           /** delete client **/
           mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.errorCode, '0');
             assert.equal(data.errorMessage, '');
             assert.equal(data.command, 'delete-consumer');
@@ -133,7 +160,7 @@ describe('>> gateway requests', function () {
           /** update client **/
           mpGateway.updateCustomer(client, function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.errorCode, '0');
             assert.equal(data.errorMessage, '');
             assert.equal(data.command, 'update-consumer');
@@ -144,7 +171,7 @@ describe('>> gateway requests', function () {
             /** delete client **/
             mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
               assert.ok(!err);
-              
+
               assert.equal(data.errorCode, '0');
               assert.equal(data.errorMessage, '');
               assert.equal(data.command, 'delete-consumer');
@@ -174,7 +201,7 @@ describe('>> gateway requests', function () {
           /** update client **/
           mpGateway.updateCustomer(unordered_client, function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.errorCode, '0');
             assert.equal(data.errorMessage, '');
             assert.equal(data.command, 'update-consumer');
@@ -185,7 +212,7 @@ describe('>> gateway requests', function () {
             /** delete client **/
             mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
               assert.ok(!err);
-              
+
               assert.equal(data.errorCode, '0');
               assert.equal(data.errorMessage, '');
               assert.equal(data.command, 'delete-consumer');
@@ -208,7 +235,7 @@ describe('>> gateway requests', function () {
           /** delete client **/
           mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.errorCode, '0');
             assert.equal(data.errorMessage, '');
             assert.equal(data.command, 'delete-consumer');
@@ -234,7 +261,7 @@ describe('>> gateway requests', function () {
           card,
           function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.errorCode, '0');
             assert.equal(data.errorMessage, '');
             assert.equal(data.command, 'add-card-onfile');
@@ -248,7 +275,7 @@ describe('>> gateway requests', function () {
               deletedCard,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.equal(data.errorCode, '0');
                 assert.equal(data.errorMessage, '');
                 assert.equal(data.command, 'delete-card-onfile');
@@ -257,7 +284,7 @@ describe('>> gateway requests', function () {
                 /** delete client **/
                 mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                   assert.ok(!err);
-                  
+
                   assert.equal(data.errorCode, '0');
                   assert.equal(data.errorMessage, '');
                   assert.equal(data.command, 'delete-consumer');
@@ -288,7 +315,7 @@ describe('>> gateway requests', function () {
               card,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.equal(data.result.token, token);
                 var cardToken = data.result.token;
                 var deletedCard = mockData.fakeDeleteCard(cId, cardToken);
@@ -298,7 +325,7 @@ describe('>> gateway requests', function () {
                   deletedCard,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorCode, '0');
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.command, 'delete-card-onfile');
@@ -307,7 +334,7 @@ describe('>> gateway requests', function () {
                     var deleteCustomer = mockData.fakeDeleteCustomer(cId);
                     mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                       assert.ok(!err);
-                      
+
                       assert.equal(data.errorCode, '0');
                       assert.equal(data.errorMessage, '');
                       assert.equal(data.command, 'delete-consumer');
@@ -340,7 +367,7 @@ describe('>> gateway requests', function () {
               deletedCard,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.equal(data.errorCode, '0');
                 assert.equal(data.errorMessage, '');
                 assert.equal(data.command, 'delete-card-onfile');
@@ -349,7 +376,7 @@ describe('>> gateway requests', function () {
                 /** delete client **/
                 mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                   assert.ok(!err);
-                  
+
                   assert.equal(data.errorCode, '0');
                   assert.equal(data.errorMessage, '');
                   assert.equal(data.command, 'delete-consumer');
@@ -377,7 +404,7 @@ describe('>> gateway requests', function () {
           auth,
           function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.authCode, '123456');
             assert.equal(data.referenceNum, auth.referenceNum);
             assert.equal(data.errorMessage, '');
@@ -398,7 +425,7 @@ describe('>> gateway requests', function () {
               deletedCard,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.equal(data.errorCode, '0');
                 assert.equal(data.errorMessage, '');
                 assert.equal(data.command, 'delete-card-onfile');
@@ -407,7 +434,7 @@ describe('>> gateway requests', function () {
                 /** delete client **/
                 mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                   assert.ok(!err);
-                  
+
                   assert.equal(data.errorCode, '0');
                   assert.equal(data.errorMessage, '');
                   assert.equal(data.command, 'delete-consumer');
@@ -439,7 +466,7 @@ describe('>> gateway requests', function () {
               auth,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.equal(data.authCode, '123456');
                 assert.equal(data.referenceNum, auth.referenceNum);
                 assert.equal(data.errorMessage, '');
@@ -459,7 +486,7 @@ describe('>> gateway requests', function () {
                   deletedCard,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorCode, '0');
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.command, 'delete-card-onfile');
@@ -468,7 +495,7 @@ describe('>> gateway requests', function () {
                     /** delete client **/
                     mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                       assert.ok(!err);
-                      
+
                       assert.equal(data.errorCode, '0');
                       assert.equal(data.errorMessage, '');
                       assert.equal(data.command, 'delete-consumer');
@@ -509,7 +536,7 @@ describe('>> gateway requests', function () {
                   capture,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.responseCode, '0');
                     assert.equal(data.responseMessage, 'CAPTURED');
@@ -522,7 +549,7 @@ describe('>> gateway requests', function () {
                       deletedCard,
                       function (err, data) {
                         assert.ok(!err);
-                        
+
                         assert.equal(data.errorCode, '0');
                         assert.equal(data.errorMessage, '');
                         assert.equal(data.command, 'delete-card-onfile');
@@ -531,7 +558,7 @@ describe('>> gateway requests', function () {
                         /** delete client **/
                         mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                           assert.ok(!err);
-                          
+
                           assert.equal(data.errorCode, '0');
                           assert.equal(data.errorMessage, '');
                           assert.equal(data.command, 'delete-consumer');
@@ -573,7 +600,7 @@ describe('>> gateway requests', function () {
                   capture,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.responseCode, '0');
                     assert.equal(data.responseMessage, 'CAPTURED');
@@ -587,7 +614,7 @@ describe('>> gateway requests', function () {
                       _void,
                       function (err, data) {
                         assert.ok(!err);
-                        
+
                         assert.equal(data.errorMessage, '');
                         assert.equal(data.responseCode, '0');
                         assert.equal(data.transactionID, transactionID);
@@ -600,7 +627,7 @@ describe('>> gateway requests', function () {
                           deletedCard,
                           function (err, data) {
                             assert.ok(!err);
-                            
+
                             assert.equal(data.errorCode, '0');
                             assert.equal(data.errorMessage, '');
                             assert.equal(data.command, 'delete-card-onfile');
@@ -609,7 +636,7 @@ describe('>> gateway requests', function () {
                             /** delete client **/
                             mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                               assert.ok(!err);
-                              
+
                               assert.equal(data.errorCode, '0');
                               assert.equal(data.errorMessage, '');
                               assert.equal(data.command, 'delete-consumer');
@@ -637,7 +664,7 @@ describe('>> gateway requests', function () {
           sale,
           function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.authCode, '123456');
             assert.equal(data.referenceNum, sale.referenceNum);
             assert.equal(data.errorMessage, '');
@@ -659,7 +686,7 @@ describe('>> gateway requests', function () {
               deletedCard,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.equal(data.errorCode, '0');
                 assert.equal(data.errorMessage, '');
                 assert.equal(data.command, 'delete-card-onfile');
@@ -668,7 +695,7 @@ describe('>> gateway requests', function () {
                 /** delete client **/
                 mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                   assert.ok(!err);
-                  
+
                   assert.equal(data.errorCode, '0');
                   assert.equal(data.errorMessage, '');
                   assert.equal(data.command, 'delete-consumer');
@@ -693,7 +720,7 @@ describe('>> gateway requests', function () {
           sale,
           function (err, data) {
             assert.ok(!err);
-            
+
             assert.equal(data.authCode, '');
             assert.equal(data.referenceNum, sale.referenceNum);
             assert.equal(data.errorMessage, '');
@@ -716,7 +743,7 @@ describe('>> gateway requests', function () {
             /** delete customer **/
             mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
               assert.ok(!err);
-              
+
               assert.equal(data.errorCode, '0');
               assert.equal(data.errorMessage, '');
               assert.equal(data.command, 'delete-consumer');
@@ -748,7 +775,7 @@ describe('>> gateway requests', function () {
               sale,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.equal(data.authCode, '123456');
                 assert.equal(data.referenceNum, sale.referenceNum);
                 assert.equal(data.errorMessage, '');
@@ -768,7 +795,7 @@ describe('>> gateway requests', function () {
                   deletedCard,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorCode, '0');
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.command, 'delete-card-onfile');
@@ -777,7 +804,7 @@ describe('>> gateway requests', function () {
                     /** delete customer **/
                     mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                       assert.ok(!err);
-                      
+
                       assert.equal(data.errorCode, '0');
                       assert.equal(data.errorMessage, '');
                       assert.equal(data.command, 'delete-consumer');
@@ -819,7 +846,7 @@ describe('>> gateway requests', function () {
                   returnPayment,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.responseCode, '0');
                     assert.equal(data.orderID, orderID);
@@ -833,7 +860,7 @@ describe('>> gateway requests', function () {
                       deletedCard,
                       function (err, data) {
                         assert.ok(!err);
-                        
+
                         assert.equal(data.errorCode, '0');
                         assert.equal(data.errorMessage, '');
                         assert.equal(data.command, 'delete-card-onfile');
@@ -842,7 +869,7 @@ describe('>> gateway requests', function () {
                         /** delete client **/
                         mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                           assert.ok(!err);
-                          
+
                           assert.equal(data.errorCode, '0');
                           assert.equal(data.errorMessage, '');
                           assert.equal(data.command, 'delete-consumer');
@@ -867,7 +894,7 @@ describe('>> gateway requests', function () {
         recurring,
         function (err, data) {
           assert.ok(!err);
-          
+
           assert.ok(data.hasOwnProperty('orderID'));
           assert.ok(data.hasOwnProperty('transactionID'));
           assert.ok(data.hasOwnProperty('transactionTimestamp'));
@@ -881,7 +908,7 @@ describe('>> gateway requests', function () {
             cancelRecurringPayment,
             function (err, data) {
               assert.ok(!err);
-              
+
               assert.equal(data.errorCode, '0');
               assert.equal(data.errorMessage, '');
               assert.equal(data.command, 'cancel-recurring');
@@ -909,7 +936,7 @@ describe('>> gateway requests', function () {
               recurring,
               function (err, data) {
                 assert.ok(!err);
-                
+
                 assert.ok(data.hasOwnProperty('orderID'));
                 assert.ok(data.hasOwnProperty('transactionID'));
                 assert.ok(data.hasOwnProperty('transactionTimestamp'));
@@ -923,7 +950,7 @@ describe('>> gateway requests', function () {
                   cancelRecurringPayment,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorCode, '0');
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.command, 'cancel-recurring');
@@ -934,7 +961,7 @@ describe('>> gateway requests', function () {
                       deletedCard,
                       function (err, data) {
                         assert.ok(!err);
-                        
+
                         assert.equal(data.errorCode, '0');
                         assert.equal(data.errorMessage, '');
                         assert.equal(data.command, 'delete-card-onfile');
@@ -943,7 +970,7 @@ describe('>> gateway requests', function () {
                         /** delete client **/
                         mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                           assert.ok(!err);
-                          
+
                           assert.equal(data.errorCode, '0');
                           assert.equal(data.errorMessage, '');
                           assert.equal(data.command, 'delete-consumer');
@@ -984,7 +1011,7 @@ describe('>> gateway requests', function () {
                   updateRecurringPayment,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorCode, '0');
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.command, 'modify-recurring');
@@ -995,7 +1022,7 @@ describe('>> gateway requests', function () {
                       cancelRecurringPayment,
                       function (err, data) {
                         assert.ok(!err);
-                        
+
                         assert.equal(data.errorCode, '0');
                         assert.equal(data.errorMessage, '');
                         assert.equal(data.command, 'cancel-recurring');
@@ -1006,7 +1033,7 @@ describe('>> gateway requests', function () {
                           deletedCard,
                           function (err, data) {
                             assert.ok(!err);
-                            
+
                             assert.equal(data.errorCode, '0');
                             assert.equal(data.errorMessage, '');
                             assert.equal(data.command, 'delete-card-onfile');
@@ -1015,7 +1042,7 @@ describe('>> gateway requests', function () {
                             /** delete client **/
                             mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                               assert.ok(!err);
-                              
+
                               assert.equal(data.errorCode, '0');
                               assert.equal(data.errorMessage, '');
                               assert.equal(data.command, 'delete-consumer');
@@ -1057,7 +1084,7 @@ describe('>> gateway requests', function () {
                   cancelRecurringPayment,
                   function (err, data) {
                     assert.ok(!err);
-                    
+
                     assert.equal(data.errorCode, '0');
                     assert.equal(data.errorMessage, '');
                     assert.equal(data.command, 'cancel-recurring');
@@ -1068,7 +1095,7 @@ describe('>> gateway requests', function () {
                       deletedCard,
                       function (err, data) {
                         assert.ok(!err);
-                        
+
                         assert.equal(data.errorCode, '0');
                         assert.equal(data.errorMessage, '');
                         assert.equal(data.command, 'delete-card-onfile');
@@ -1077,7 +1104,7 @@ describe('>> gateway requests', function () {
                         /** delete client **/
                         mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
                           assert.ok(!err);
-                          
+
                           assert.equal(data.errorCode, '0');
                           assert.equal(data.errorMessage, '');
                           assert.equal(data.command, 'delete-consumer');

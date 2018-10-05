@@ -30,32 +30,31 @@ describe('>> gateway requests', function () {
 
   describe('customer', function () {
     it('NEW add customer basic data', function (done) {
+      /** add client **/
       var client = mockData.fakeClient();
 
-      /** add client **/
-      mpGateway.addCustomer2(
-        client,
-        function (err, data) {
+      mpGateway.addCustomer2(client).then(data => {
+        console.log('\n\n MAXIPAGO RESPONSE', data, '\n\n');
+
+        assert.equal(data.errorCode, '0');
+        assert.equal(data.command, 'add-consumer');
+        assert.ok(data.hasOwnProperty('result'));
+        assert.ok(data.result.hasOwnProperty('customerId'));
+        var deleteCustomer = mockData.fakeDeleteCustomer(data.result.customerId);
+
+        /** delete client **/
+        mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
           assert.ok(!err);
           assert.equal(data.errorCode, '0');
           assert.equal(data.errorMessage, '');
-          assert.equal(data.command, 'add-consumer');
+          assert.equal(data.command, 'delete-consumer');
           assert.ok(data.hasOwnProperty('result'));
-          assert.ok(data.result.hasOwnProperty('customerId'));
-          var deleteCustomer = mockData.fakeDeleteCustomer(data.result.customerId);
-
-          /** delete client **/
-          mpGateway.deleteCustomer(deleteCustomer, function (err, data) {
-            assert.ok(!err);
-            assert.equal(data.errorCode, '0');
-            assert.equal(data.errorMessage, '');
-            assert.equal(data.command, 'delete-consumer');
-            assert.ok(data.hasOwnProperty('result'));
-            assert.equal(data.result, '');
-            done();
-          });
-        });
+          assert.equal(data.result, '');
+          done();
+        })
+      })
     });
+
     it('add customer basic data', function (done) {
       var client = mockData.fakeClient();
 

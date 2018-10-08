@@ -153,6 +153,17 @@ describe('GATEWAY REQUESTS -  This tests will take a few minutes to be completed
   });
 
   describe('Card Requests', function () {
+    it('zero dollar transaction', function (done) {
+      /** zero dollar **/
+      var zeroDollar = mockData.fakeZeroDollar();
+      mpGateway.zeroDollar(zeroDollar).then(data => {
+        assert.equal(data.responseCode, '0');
+        assert.equal(data.responseMessage, 'VERIFIED');
+        assert.equal(data.processorMessage, 'APPROVED');
+        done();
+      });
+    });
+
     it('add new card', function (done) {
       /** add client **/
       var client = mockData.fakeClient();

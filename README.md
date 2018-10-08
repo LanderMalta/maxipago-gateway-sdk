@@ -8,23 +8,27 @@ According to the [maxiPago! API Docs](http://developers.maxipago.com/apidocs/), 
  3. Communicate and process the request with maxiPago! gateway.
  4. Returns the received maxiPago! XML result in JSON format.
 
-### Installation 
+# Dependencies
+ > "dotenv" - To work with internal environment variables.
+ > "moment" - To work correctly with datas and time zones.
+ > "xml-js"- To convert JSON to  XML
+ > "axios" -  To make MaxiPago Requests.
+ > "xml2js" - To convert XML to JSON
+ > "faker" - To create fake tests data.
+
+# Installation 
 ```sh
 $ npm install maxipago-gateway-sdk --save
 ```
 
 # Usage
-First import or require maxiPago! SDK library.
+Import maxiPago! SDK library.
 ```js
-var maxipago = require('maxipago-gateway-sdk');
-or use EJS 6
 import maxipago from 'maxipago-gateway-sdk';
 ```
----
----
----
+# Requests
+
 #### GATEWAY
----
 
 This method build an gateway to make you able to make requests on maxiPago! platform.
 ###### Method:
@@ -33,7 +37,7 @@ This method build an gateway to make you able to make requests on maxiPago! plat
 ###### Params:
 * **maxiPagoID** = *your maxipago ID*
 * **maxiPagoKEY**= *your maxipago KEY.*
-* **maxiPagoEnv**= *set maxipago enviorement ('development' = call api.maxipago.net / 'production' = call api.maxipago.net).* 
+* **maxiPagoEnv**= *URL maxipago enviorement ('development' = api.maxipago.net  'production' = api.maxipago.net).* 
 
 ###### Example:
 ```js
@@ -43,20 +47,18 @@ var maxiPagoEnv = 'development';
 var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKEY, maxiPagoEnv);
 ``` 
 ---
----
----
+
 #### CUSTOMERS
----
-## Adding Customer
+## Add Customer
 
  
 This method add your customer on maxiPago! platform.
 ###### Method:
-* **.addCustomer(*addCustomerJSON* , *callback*);**
+* **.addCustomer(*addCustomerJSON*);**
 
 ###### Params:
 * **addCustomerJSON** = *your customer data in JSON format*.
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
@@ -76,21 +78,18 @@ var addCustomerJSON =
   "dob": "06/26/2018",
   "sex": "M"
 };
-mpGateway.addCustomer(addCustomerJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGateway.addCustomer(addCustomerJSON);
 ```
-----
-## Updating Customer
+
+## Update Customer
 
 This method update previously added customer on maxiPago! platform.
 ###### Method:
-* **.updateCustomer(*updateCustomerJSON*, *callback*);**
+* **.updateCustomer(*updateCustomerJSON*);**
 
 ###### Params:
 * **updateCustomerJSON** = *your updated customer data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 * 
 ###### Example:
 ```js
@@ -101,43 +100,39 @@ var updateCustomerJSON =
   "lastName": "Corwin updated",
   "customerId": "119679"
 };
-mpGateway.updateCustomer(updateCustomerJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
+mpGateway.updateCustomer(updateCustomerJSON)
+
+
 });
 ```
-----
-## Deleting Customer
+## Delete Customer
 This method delete previously added customer on maxiPago! platform.
 ###### Method:
-* **.deleteCustomer(*deleteCustomerJSON*, *callback*);**
+* **.deleteCustomer(*deleteCustomerJSON*);**
 
 ###### Params:
 * **deleteCustomerJSON** = *your updated customer data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
 var deleteCustomerJSON = { customerId: '119679'};
-mpGateway.deleteCustomer(deleteCustomerJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
+let maxiPagoJsonResponse = mpGatewaydeleteCustomer(deleteCustomerJSON);
+
+
 });
 ```
 ---
----
----
 #### CARDS
----
-## Adding Card
+
+## Add Card
 
 This method add an card for previously added customer on maxiPago! platform.
 ###### Method:
-* **.addCard(*addCardJSON*, *callback*);**
+* **.addCard(*addCardJSON*);**
 
 ###### Params:
 * **addCardJSON** = *your card data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
 
 ###### Example:
 ```js
@@ -149,22 +144,19 @@ var addCardJSON =
   "expirationYear": 2020,
   "billingName": "Corwin"
 };
-mpGateway.addCard(addCardJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayaddCard(addCardJSON);
+
 ```
 
-----
-## Deleting Card
+## Delete Card
 
 This method delete an card previously added on maxiPago! platform.
 ###### Method:
-* **.deleteCard(*deleteCardJSON*, *callback*);**
+* **.deleteCard(*deleteCardJSON*);**
 
 ###### Params:
 * **deleteCardJSON** = *your card data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
@@ -173,25 +165,20 @@ var deleteCardJSON =
   "customerId": "119722",
   "token": "+adHuFvmSms="
 };
-mpGateway.deleteCard(deleteCardJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewaydeleteCard(deleteCardJSON);
 ```
 ---
----
----
 #### PAYMENTS
----
+
 ## Auth
 
 This method add an sale authorization for previously card added on maxiPago! platform.
 ###### Method:
-* **.auth(*authJSON*, *callback*);**
+* **.auth(*authJSON*);**
 
 ###### Params:
 * **authJSON** = *your authorization data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
@@ -218,10 +205,7 @@ var authJSON =
     "customerToken": "119766"
   }
 };
-mpGateway.auth(authJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayauth(authJSON);
 ```
 You can also request an authorization using card token:
 ```js
@@ -242,21 +226,18 @@ var authJSON =
     "chargeTotal": "10.00"
   }
 };
-mpGateway.auth(authJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayauth(authJSON);
 ```
-----
+
 ## Capture
 
 This method capture an sale authorization previously added on maxiPago! platform.
 ###### Method:
-* **.capture(*captureJSON*, *callback*);**
+* **.capture(*captureJSON*);**
 
 ###### Params:
 * **captureJSON** = *your capture data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
@@ -268,40 +249,34 @@ var captureJSON =
     "chargeTotal": "10.00"
   }
 }
-mpGateway.capture(captureJSON, function (err, data) {  
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted inf JSON format.
-});
+let maxiPagoJsonResponse = mpGatewaycapture(captureJSON);
 ```
-----
+
 ## Void
 
 This method void an previously capture requested on maxiPago! platform.
 ###### Method:
-* **.void(*voidJSON*, *callback*);**
+* **.void(*voidJSON*);**
 
 ###### Params:
 * **voidJSON** = *your void data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
 var voidJSON = {transactionID: '2203293'};
-mpGateway.void(voidJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayvoid(voidJSON);
 ```
-----
+
 ## Return Payment
 
 This method return an capture previously requested on maxiPago! platform.
 ###### Method:
-* **.returnPayment(*returnPaymentJSON*, *callback*);**
+* **.returnPayment(*returnPaymentJSON*);**
 
 ###### Params:
 * **returnPaymentJSON** = *your return payment data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
@@ -314,25 +289,21 @@ var returnPaymentJSON =
   }
 };
 
-mpGateway.returnPayment(returnPaymentJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted inf JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayreturnPayment(returnPaymentJSON);
 ```
----
----
+
 ---
 #### RECURRING PAYMENTS
----
+
 ## Adding Recurring Payment
 
 This method add an recurring payment maxiPago! platform.
 ###### Method:
-* **.recurringPayment(*recurringPaymentJSON*, *callback*);**
+* **.recurringPayment(*recurringPaymentJSON*);**
 
 ###### Params:
 * **recurringPaymentJSON** = *your recurring payment data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
@@ -385,10 +356,7 @@ var recurringPaymentJSON =
     "failureThreshold": "5"
   }
 };
-mpGateway.recurringPayment(recurringPaymentJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayrecurringPayment(recurringPaymentJSON);
 ```
 You can request an recurring payment using card token:
 ```js
@@ -439,20 +407,16 @@ var recurringPaymentJSON =
     "failureThreshold": "5"
   }
 }
-mpGateway.recurringPayment(recurringPaymentJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayrecurringPayment(recurringPaymentJSON);
 ```
-----
 ## Updating Recurring Payment
 This method update an recurring payment  previously added maxiPago! platform.
 ###### Method:
-* **.updateRecurringPayment(*updateRecurringPaymentJSON*, *callback*);**
+* **.updateRecurringPayment(*updateRecurringPaymentJSON*);**
 
 ###### Params:
 * **updateRecurringPaymentJSON** = *your recurring payment data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
@@ -493,31 +457,25 @@ var updateRecurringPaymentJSON =
     "phone": "801.057.6041"
   }
 };
-mpGateway.void(updateRecurringPaymentJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewayvoid(updateRecurringPaymentJSON);
 ```
-----
 ## Canceling Recurring Payment
 This method cancel an previously recurring payment added on maxiPago! platform.
 ###### Method:
-* **.cancelRecurringPayment(*cancelRecurringPaymentJSON*, *callback*);**
+* **.cancelRecurringPayment(*cancelRecurringPaymentJSON*);**
 
 ###### Params:
 * **cancelRecurringPaymentJSON** = *your recurring payment data in JSON format.*
-* **callback** = *callback to get maxiPago! processed data.*
+
 
 ###### Example:
 ```js
 var cancelRecurringPaymentJSON = {"orderID":"0A0104A3:0165A0AC8533:9B78:5B51BACC"};
-mpGateway.cancelRecurringPayment(cancelRecurringPaymentJSON, function (err, data) {
-   //err is maxiPago! error message.
-   //data is maxiPago! response converted in JSON format.
-});
+let maxiPagoJsonResponse = mpGatewaycancelRecurringPayment(cancelRecurringPaymentJSON);
 ```
+
 ----
-----
+
 ----
 
 # License

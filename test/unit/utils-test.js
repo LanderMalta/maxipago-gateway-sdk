@@ -3,8 +3,8 @@ var sinon = require('sinon');
 var assert = require('assert');
 var models = require('../../lib/core/models');
 
-describe('>> core', function () {
-  describe('**utils', function () {
+describe('CORE FUNCTIONS', function () {
+  describe('Utils', function () {
     it('return an obj with only model attributes and in correct order', function () {
       var strict_obj = {
         a: undefined,
@@ -40,7 +40,7 @@ describe('>> core', function () {
       assert.deepEqual(Object.keys(result), Object.keys(strict_obj));
     });
   });
-  describe('**xmlBuilders for maxiPago!', function () {
+  describe('XML Builders for maxiPago!', function () {
     var xml2js;
     var fn_buildObj;
     var formattedObj;

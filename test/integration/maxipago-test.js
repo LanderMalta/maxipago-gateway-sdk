@@ -451,11 +451,11 @@ describe('GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
-        var cId = data.result.customerId;
-
+        var cId = data.result.customerId;        
         /** add sale **/
-        var sale = mockData.fakeSale(cId, true);
+        var sale = mockData.fakeSale(cId, true, client.firstName);
         mpGateway.sale(sale).then(data => {
+          console.log(data);
           assert.equal(data.authCode, '123456');
           assert.equal(data.referenceNum, sale.referenceNum);
           assert.equal(data.responseCode, '0');

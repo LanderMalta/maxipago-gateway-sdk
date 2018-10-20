@@ -262,6 +262,7 @@ describe('GATEWAY REQUESTS -  This tests will take a few minutes to be completed
   });
 
   describe('Sale Requests', function () {
+    
     it('add auth', function (done) {
       /** add client **/
       var client = mockData.fakeClient();
@@ -455,7 +456,6 @@ describe('GATEWAY REQUESTS -  This tests will take a few minutes to be completed
         /** add sale **/
         var sale = mockData.fakeSale(cId, true, client.firstName);
         mpGateway.sale(sale).then(data => {
-          console.log(data);
           assert.equal(data.authCode, '123456');
           assert.equal(data.referenceNum, sale.referenceNum);
           assert.equal(data.responseCode, '0');

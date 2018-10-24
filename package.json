@@ -15,9 +15,6 @@
     "type": "git",
     "url": "https://github.com/LanderMalta-luizalabs/maxipago-gateway-sdk.git"
   },
-  "publishConfig": {
-    "registry": "http://nexus.appsluiza.com.br/repository/npm/"
-  },
   "directories": {
     "lib": "./lib"
   },

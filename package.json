@@ -1,6 +1,6 @@
 {
   "name": "maxipago-gateway-sdk",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Javascript lib for MaxiPago Gateway",
   "license": "MIT",
   "contributors": [
@@ -14,6 +14,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/LanderMalta-luizalabs/maxipago-gateway-sdk.git"
+  },
+  "publishConfig": {
+    "registry": "http://nexus.appsluiza.com.br/repository/npm/"
   },
   "directories": {
     "lib": "./lib"

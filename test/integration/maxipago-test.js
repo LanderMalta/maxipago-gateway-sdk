@@ -7,14 +7,14 @@ require("dotenv").config({ path: "../.env" });
 var testMerchantId = process.env.MP_TEST_ID;
 var testMerchantKey = process.env.MP_TEST_KEY;
 
-describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed", function() {
+describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed", function () {
   var start;
   var count;
   var itTimeout = 100000;
   var mpGateway = null;
   this.timeout(itTimeout);
 
-  before(function() {
+  before(function () {
     count = 0;
     start = moment();
     mpGateway = maxipago.buildGateway(
@@ -23,18 +23,18 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       "development"
     );
   });
-  beforeEach(function() {
+  beforeEach(function () {
     count++;
   });
-  after(function() {
+  after(function () {
     var total = moment() - start;
     if (total >= 0.25 * count * itTimeout) {
       console.warn("Test suite taken too long! " + total + "ms");
     }
   });
 
-  describe("Customer Requests", function() {
-    it("add customer basic data", function(done) {
+  describe("Customer Requests", function () {
+    it("add customer basic data", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -53,7 +53,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add customer full data", function(done) {
+    it("add customer full data", function (done) {
       /** add client **/
       var client = mockData.fakeFullClient();
       mpGateway.addCustomer(client).then(data => {
@@ -72,13 +72,13 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add customer full data with unordered request", function(done) {
+    it("add customer full data with unordered request", function (done) {
       /** add client **/
       var client = mockData.fakeFullClient();
       var unordered_client = {};
       Object.keys(client)
         .reverse()
-        .forEach(function(key) {
+        .forEach(function (key) {
           unordered_client[key] = client[key];
         });
       mpGateway.addCustomer(unordered_client).then(data => {
@@ -97,7 +97,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("update customer data", function(done) {
+    it("update customer data", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -120,13 +120,13 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("update customer data with unordered request", function(done) {
+    it("update customer data with unordered request", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       var unordered_client = {};
       Object.keys(client)
         .reverse()
-        .forEach(function(key) {
+        .forEach(function (key) {
           unordered_client[key] = client[key];
         });
       mpGateway.addCustomer(client).then(data => {
@@ -151,7 +151,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("delete customer data", function(done) {
+    it("delete customer data", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -168,8 +168,8 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
     });
   });
 
-  describe("Card Requests", function() {
-    it("zero dollar transaction", function(done) {
+  describe("Card Requests", function () {
+    it("zero dollar transaction", function (done) {
       /** zero dollar **/
       var zeroDollar = mockData.fakeZeroDollar();
       mpGateway.zeroDollar(zeroDollar).then(data => {
@@ -180,7 +180,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add new card", function(done) {
+    it("add new card", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -212,7 +212,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add existing card", function(done) {
+    it("add existing card", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -247,7 +247,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("delete existing card", function(done) {
+    it("delete existing card", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -277,8 +277,8 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
     });
   });
 
-  describe("Sale Requests", function() {
-    it("add auth", function(done) {
+  describe("Sale Requests", function () {
+    it("add auth", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -321,7 +321,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add auth using token", function(done) {
+    it("add auth using token", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -366,7 +366,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("capture an auth", function(done) {
+    it("capture an auth", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -411,7 +411,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("void an capture", function(done) {
+    it("void an capture", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -466,7 +466,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add direct sale using token", function(done) {
+    it("add direct sale using token", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
 
@@ -520,7 +520,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add direct sale using token with fraudcheck", function(done) {
+    it("add direct sale using token with fraudcheck", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
 
@@ -574,7 +574,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add direct sale with failed response", function(done) {
+    it("add direct sale with failed response", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -610,7 +610,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add direct sale with fraudcheck", function(done) {
+    it("add direct sale with fraudcheck", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
 
@@ -655,7 +655,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("return an capture", function(done) {
+    it("return an capture", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -705,8 +705,8 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
     });
   });
 
-  describe("Recurring Requests", function() {
-    it("add recurring payment", function(done) {
+  describe("Recurring Requests", function () {
+    it("add recurring payment", function (done) {
       /** create recurring payment **/
       var recurring = mockData.fakeRecurringPayment();
       mpGateway.recurringPayment(recurring).then(data => {
@@ -729,7 +729,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("add recurring payment using token", function(done) {
+    it("add recurring payment using token", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -780,7 +780,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("update recurring payment", function(done) {
+    it("update recurring payment", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -840,7 +840,7 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
 
-    it("cancel recurring payment", function(done) {
+    it("cancel recurring payment", function (done) {
       /** add client **/
       var client = mockData.fakeClient();
       mpGateway.addCustomer(client).then(data => {
@@ -889,4 +889,18 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
       });
     });
   });
+
+  describe("Transaction Requests", function () {
+    it("quering transaction details", function (done) {
+      var transactionQuery = mockData.fakeTransactionQuery();
+      mpGateway.transactionQuery(transactionQuery).then(data => {
+        assert.equal(data.rresponse.header.errorCode, "0");
+        assert.equal(data.rresponse.header.command, "transactionDetailReport");
+        assert.equal(data.rresponse.result.records.record.transactionId, "2997111");
+        assert.equal(data.rresponse.result.records.record.approvalCode, "123456");
+        done();
+      });
+    });
+  });
+
 });

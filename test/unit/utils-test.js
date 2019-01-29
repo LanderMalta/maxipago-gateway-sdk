@@ -461,5 +461,35 @@ describe('CORE FUNCTIONS', function () {
       }));
     });
 
+    it('build buildTransactionQueryXML', function () {
+      var data = {
+        'data': 'data'
+      };
+      var auth = {
+        'auth': 'auth'
+      };
+      var xmlOpts = {
+        'opt': 'opt'
+      };
+
+      mp_utils.buildTransactionQueryXML(data, auth, xmlOpts);
+
+      assert.ok(fn_formatObject.calledOnce);
+      assert.ok(fn_formatObject.calledWithExactly(data, models.transactionQuery));
+
+      assert.ok(xml2js.Builder.calledOnce);
+      assert.ok(xml2js.Builder.calledWithExactly(xmlOpts));
+
+      assert.ok(fn_buildObj.calledOnce);
+      assert.ok(fn_buildObj.calledWithExactly({
+        'rapi-request': {
+          verification: auth,
+          command: 'transactionDetailReport',
+          request: formattedObj
+        }
+      }));
+
+    });
+
   });
 });

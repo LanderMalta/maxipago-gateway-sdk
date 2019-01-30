@@ -894,10 +894,8 @@ describe("GATEWAY REQUESTS -  This tests will take a few minutes to be completed
     it("quering transaction details", function (done) {
       var transactionQuery = mockData.fakeTransactionQuery();
       mpGateway.transactionQuery(transactionQuery).then(data => {
-        assert.equal(data.rresponse.header.errorCode, "0");
-        assert.equal(data.rresponse.header.command, "transactionDetailReport");
-        assert.equal(data.rresponse.result.records.record.transactionId, "2997111");
-        assert.equal(data.rresponse.result.records.record.approvalCode, "123456");
+        assert.equal(data.transactionId, "2997111");
+        assert.equal(data.approvalCode, "123456");
         done();
       });
     });

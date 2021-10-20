@@ -11,8 +11,8 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 ---
 
 # Installation 
-```sh
-$ npm install maxipago-gateway-sdk --save
+```node
+ npm install maxipago-gateway-sdk --save
 ```
 
 ---
@@ -567,16 +567,16 @@ This method build an gateway to make you able to make requests on MaxiPago platf
 ##### Building
  - Fork and clone the repository to your machine and install the project dependencies.
 
-```sh
-$ npm install
+```node
+ npm install
 ```
 ##### Testing
 - Make a copy of `.env-example` and rename it to `.env`
 - Fill in your test MaxiPago settings the `.env` file
 - Run the tests with:
 
-```sh
-$ npm run test
+```node
+ npm run test
 ```
 
 > :warning:  Warning, the tests make real calls to testapi.maxipago.net with fake data. Be sure you have internet connection, be patient with timeout and be careful with your MaxiPago settings!

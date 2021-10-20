@@ -571,7 +571,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
  npm install
 ```
 ##### Testing
-- Make a copy of `.env-example` and rename it to `.env`
+- Make a copy of `.env-example` file and rename it to `.env`
 - Fill in your test MaxiPago settings the `.env` file
 - Run the tests with:
 

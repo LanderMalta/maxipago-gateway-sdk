@@ -1,19 +1,19 @@
 {
   "name": "maxipago-gateway-sdk",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Javascript lib for MaxiPago Gateway",
   "license": "MIT",
   "contributors": [
     {
       "name": "Lander Malta",
-      "email": "lander.malta@luizalabs.com.br",
-      "url": "https://github.com/LanderMalta-luizalabs"
+      "email": "lander.malta@hotmail.com",
+      "url": "https://github.com/LanderMalta"
     }
   ],
-  "homepage": "https://github.com/LanderMalta-luizalabs/maxipago-gateway-sdk",
+  "homepage": "https://github.com/LanderMalta/maxipago-gateway-sdk",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LanderMalta-luizalabs/maxipago-gateway-sdk.git"
+    "url": "https://github.com/LanderMalta/maxipago-gateway-sdk.git"
   },
   "directories": {
     "lib": "./lib"

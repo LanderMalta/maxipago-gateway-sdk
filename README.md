@@ -575,7 +575,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
 
 ## <a name="issue"></a> Found a Bug?
 
-If you find a bug in the source code, you can help us by submitting an [issue](https://github.com/LanderMalta/maxipago-gateway-sdk/issues) . Even better, you can submit a [pull request](https://github.com/LanderMalta/maxipago-gateway-sdk/pulls) with a fix.
+If you find a bug in the source code, you can help us by submitting an [issue](https://github.com/LanderMalta/maxipago-gateway-sdk/issues). Even better, you can submit a [pull request](https://github.com/LanderMalta/maxipago-gateway-sdk/pulls) with a fix.
 
 
 ## <a name="feature"></a> Missing a Feature?
@@ -583,9 +583,10 @@ You can *request* a new feature by submitting an [issue](https://github.com/Land
 
 If you would like to *implement* a new feature, please consider the size of the change in order to determine the right steps to proceed:
 
-* **Small Features** can be crafted and directly submitted as a Pull Request.
+* **Small Features** can be crafted and directly submitted as a [pull request](https://github.com/LanderMalta/maxipago-gateway-sdk/pulls).
 </br>
-* For a **Major Feature**, first open an issue and outline your proposal so that it can be discussed.
+
+* For a **Major Feature**, first open an [issue](https://github.com/LanderMalta/maxipago-gateway-sdk/issues) and outline your proposal so that it can be discussed.
   This process allows us to better coordinate our efforts, prevent duplication of work, and help you to craft the change so that it is successfully accepted into the project.
 
 

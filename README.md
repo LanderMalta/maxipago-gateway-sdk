@@ -106,10 +106,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     "lastName": "Corwin updated",
     "customerId": "119679"
   };
-  mpGateway.updateCustomer(updateCustomerJSON)
-
-
-  });
+  let maxiPagoJsonResponse = mpGateway.updateCustomer(updateCustomerJSON);
   ```
   </p>
   </details>
@@ -128,12 +125,8 @@ This method build an gateway to make you able to make requests on MaxiPago platf
   ###### Example:
   ```js
   var deleteCustomerJSON = { customerId: '119679'};
-  let maxiPagoJsonResponse = mpGatewaydeleteCustomer(deleteCustomerJSON);
-
-
-  });
+  let maxiPagoJsonResponse = mpGateway.deleteCustomer(deleteCustomerJSON);
   ```
-
   </p>
   </details>
 </p>
@@ -166,8 +159,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     "expirationYear": 2020,
     "billingName": "Corwin"
   };
-  let maxiPagoJsonResponse = mpGatewayaddCard(addCardJSON);
-
+  let maxiPagoJsonResponse = mpGateway.addCard(addCardJSON);
   ```
   </p>
   </details>
@@ -190,7 +182,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     "customerId": "119722",
     "token": "+adHuFvmSms="
   };
-  let maxiPagoJsonResponse = mpGatewaydeleteCard(deleteCardJSON);
+  let maxiPagoJsonResponse = mpGateway.deleteCard(deleteCardJSON);
   ```
 
   </p>
@@ -240,7 +232,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
       "customerToken": "119766"
     }
   };
-  let maxiPagoJsonResponse = mpGatewayauth(authJSON);
+  let maxiPagoJsonResponse = mpGateway.auth(authJSON);
   ```
   You can also request an authorization using card token:
   ```js
@@ -261,7 +253,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
       "chargeTotal": "10.00"
     }
   };
-  let maxiPagoJsonResponse = mpGatewayauth(authJSON);
+  let maxiPagoJsonResponse = mpGateway.auth(authJSON);
   ```
   </p>
   </details>
@@ -287,7 +279,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
       "chargeTotal": "10.00"
     }
   }
-  let maxiPagoJsonResponse = mpGatewaycapture(captureJSON);
+  let maxiPagoJsonResponse = mpGateway.capture(captureJSON);
   ```
   </p>
   </details>
@@ -306,7 +298,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
   ###### Example:
   ```js
   var voidJSON = {transactionID: '2203293'};
-  let maxiPagoJsonResponse = mpGatewayvoid(voidJSON);
+  let maxiPagoJsonResponse = mpGateway.void(voidJSON);
   ```
   </p>
   </details>
@@ -333,7 +325,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     }
   };
 
-  let maxiPagoJsonResponse = mpGatewayreturnPayment(returnPaymentJSON);
+  let maxiPagoJsonResponse = mpGateway.returnPayment(returnPaymentJSON);
   ```
 
   </p>
@@ -409,7 +401,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
       "failureThreshold": "5"
     }
   };
-  let maxiPagoJsonResponse = mpGatewayrecurringPayment(recurringPaymentJSON);
+  let maxiPagoJsonResponse = mpGateway.recurringPayment(recurringPaymentJSON);
   ```
   You can request an recurring payment using card token:
   ```js
@@ -460,7 +452,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
       "failureThreshold": "5"
     }
   }
-  let maxiPagoJsonResponse = mpGatewayrecurringPayment(recurringPaymentJSON);
+  let maxiPagoJsonResponse = mpGateway.recurringPayment(recurringPaymentJSON);
   ```
   </p>
   </details>
@@ -515,7 +507,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
       "phone": "801.057.6041"
     }
   };
-  let maxiPagoJsonResponse = mpGatewayvoid(updateRecurringPaymentJSON);
+  let maxiPagoJsonResponse = mpGateway.void(updateRecurringPaymentJSON);
   ```
 
   </p>
@@ -535,7 +527,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
   ###### Example:
   ```js
   var cancelRecurringPaymentJSON = {"orderID":"0A0104A3:0165A0AC8533:9B78:5B51BACC"};
-  let maxiPagoJsonResponse = mpGatewaycancelRecurringPayment(cancelRecurringPaymentJSON);
+  let maxiPagoJsonResponse = mpGateway.cancelRecurringPayment(cancelRecurringPaymentJSON);
   ```
 
   </p>
@@ -561,7 +553,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
  - [Building and Testing](#running)
  - [Found a Bug?](#issue)
  - [Missing a Feature?](#feature)
- - [Commit Message Guidelines](#commit)
+ - [Commit Message Guidelines](#commit-guide)
 
 ## <a name="running"></a> Building and Testing
 ##### Building
@@ -599,7 +591,7 @@ If you would like to *implement* a new feature, please consider the size of the 
 * **Small Features** can be crafted and directly submitted as a Pull Request.
 
 
-## <a href="commit"></a>Commit Message Header
+## <a name="commit-guide"></a>Commit Message Header
 
 ```
 <type>: <short summary>
@@ -633,6 +625,7 @@ Use the summary field to provide a succinct description of the change:
 * use the imperative, present tense: "change" not "changed" nor "changes"
 * don't capitalize the first letter
 * no dot (.) at the end
+
 ---
 
 # License

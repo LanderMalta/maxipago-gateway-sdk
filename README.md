@@ -7,16 +7,17 @@ This library performs the following basic steps:
 2. Convert the request into XML format and communicate with the MaxiPago API.
 3. Transforms and returns the result of the MaxiPago API request in JSON format.
 
----
 
 # Install 
 ```node
  npm install maxipago-gateway-sdk --save
 ```
 
----
+
 
 # Usage
+
+### Import
 Import **maxipago-gateway-sdk** into your context.
 ```js
 import maxipago from 'maxipago-gateway-sdk';
@@ -32,7 +33,7 @@ This method will build an gateway to make you able to make requests on MaxiPago 
 ###### Params:
  * **maxiPagoID** = *your maxipago ID*
  * **maxiPagoKey**= *your maxipago KEY.*
- * **maxiPagoEnv** = *URL maxipago enviorement, when 'development' calls [testapi.maxipago.net](testapi.maxipago.net), when  'production' calls [api.maxipago.net](api.maxipago.net).* 
+ * **maxiPagoEnv** = *URL maxipago enviorement, when **'development'** request [testapi.maxipago.net](testapi.maxipago.net) url, when  **'production'** request [api.maxipago.net](api.maxipago.net) url.* 
 
 ###### Example:
 
@@ -43,7 +44,6 @@ var maxiPagoEnv = 'development';
 var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKey, maxiPagoEnv);
 ``` 
 
----
 
 
 # Requests
@@ -541,7 +541,6 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 </p>
 </details>
 
----
 
 # Internal Dependencies
  * **dotenv** - To work with internal environment variables.
@@ -551,24 +550,23 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
  * **xml2js** - To convert XML to JSON
  * **faker** - To create fake data tests.
 
----
 
 # Contributing
  We would love for you to contribute to the project and help make it even better than it is today!
 
- - [Building and Testing](#running)
+ - [Building](#building)
+ - [Testing](#testing)
  - [Found a Bug?](#issue)
  - [Missing a Feature?](#feature)
  - [Commit Guide](#commit-guide)
 
-## <a name="running"></a> Building and Testing
-##### Building
+### <a name="building"></a>Building
  - Fork and clone the repository to your machine and install the project dependencies.
 
 ```node
  npm install
 ```
-##### Testing
+### <a name="testing"></a>Testing
 - Make a copy of `.env-example` file and rename it to `.env`.
 - Fill in your test MaxiPago settings in `.env` file.
 - Run the tests with:
@@ -579,12 +577,12 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 
 > :warning:  Warning, Running tests will make real requests to [testapi.maxipago.net](testapi.maxipago.net) with fake data. Be sure you have internet connection and be patient with timeout. **Be careful with your MaxiPago settings!**
 
-## <a name="issue"></a> Found a Bug?
+### <a name="issue"></a> Found a Bug?
 
 If you find a bug in the source code, you can help us by submitting an [issue](https://github.com/LanderMalta/maxipago-gateway-sdk/issues). Even better, you can submit a [pull request](https://github.com/LanderMalta/maxipago-gateway-sdk/pulls) with a fix.
 
 
-## <a name="feature"></a> Missing a Feature?
+### <a name="feature"></a> Missing a Feature?
 You can *request* a new feature by submitting an [issue](https://github.com/LanderMalta/maxipago-gateway-sdk/issues) to our github repository.
 
 If you would like to *implement* a new feature, please consider the size of the change in order to determine the right steps to proceed:
@@ -598,9 +596,9 @@ If you would like to *implement* a new feature, please consider the size of the 
 
 
 
-## <a name="commit-guide"></a>Commit Guide
+### <a name="commit-guide"></a>Commit Guide
 
-#### Commit Message Header
+### Commit Message Header
 
 ```
 <type>: <short summary>
@@ -613,7 +611,7 @@ If you would like to *implement* a new feature, please consider the size of the 
 The `<type>` and `<summary>` fields are mandatory.
 
 
-##### Type
+### Type
 
 Must be one of the following:
 
@@ -627,7 +625,7 @@ Must be one of the following:
 * **test**: Adding missing tests or correcting existing tests
 
 
-##### Summary
+### Summary
 
 Use the summary field to provide a succinct description of the change:
 

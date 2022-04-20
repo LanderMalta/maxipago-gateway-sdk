@@ -1,16 +1,15 @@
-
 # MaxiPago - Gateway SDK
 
+Library written in javascript to perform operations with [MaxiPago API](https://www.maxipago.com/developers/apidocs/).
 
- NodeJS SDK for MaxiPago payment gateway.
-According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), this SDK performs the following steps:
- 1. Receive  MaxiPago requests in JSON format and transform into XML format.
- 3. Communicate and process the request with MaxiPago gateway.
- 4. Returns the received MaxiPago XML result in JSON format.
+This library performs the following basic steps:
+1. Receives MaxiPago API requests in JSON format.
+2. Convert the request into XML format and communicate with the MaxiPago API.
+3. Transforms and returns the result of the MaxiPago API request in JSON format.
 
 ---
 
-# Installation 
+# Install 
 ```node
  npm install maxipago-gateway-sdk --save
 ```
@@ -18,32 +17,39 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 ---
 
 # Usage
-Import maxipago-gateway-sdk into your context.
+Import **maxipago-gateway-sdk** into your context.
 ```js
 import maxipago from 'maxipago-gateway-sdk';
 ```
 
 
-Instantiate the gateway
+### Build the gateway
 
-```js
-var maxiPagoID = 'YOUR MaxiPagoID';
-var maxiPagoKEY = 'YOUR MaxiPagoKEY';
-var maxiPagoEnv = 'development';
-var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKEY, maxiPagoEnv);
-``` 
-This method build an gateway to make you able to make requests on MaxiPago platform.
+This method will build an gateway to make you able to make requests on MaxiPago API.
 ###### Method:
-* **.builtGateway(*maxiPagoID*, *maxiPagoKEY*, *maxiPagoEnv*)**
+ * **.builtGateway(*maxiPagoID*, *maxiPagoKey*, *maxiPagoEnv*)**
 
 ###### Params:
-* **maxiPagoID** = *your maxipago ID*
-* **maxiPagoKEY**= *your maxipago KEY.*
-* **maxiPagoEnv**= *URL maxipago enviorement, when 'development' calls testapi.maxipago.net, when  'production' calls api.maxipago.net).* 
+ * **maxiPagoID** = *your maxipago ID*
+ * **maxiPagoKey**= *your maxipago KEY.*
+ * **maxiPagoEnv** = *URL maxipago enviorement, when 'development' calls [testapi.maxipago.net](testapi.maxipago.net), when  'production' calls [api.maxipago.net](api.maxipago.net).* 
+
+###### Example:
+
+```js
+var maxiPagoID = 'Your MaxiPagoID';
+var maxiPagoKey = 'Your MaxiPagoKey';
+var maxiPagoEnv = 'development';
+var mpGateway = maxipago.buildGateway(maxiPagoID, maxiPagoKey, maxiPagoEnv);
+``` 
 
 ---
 
+
 # Requests
+
+According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), this library has the following mapped functionalities:
+
 
 <details>
 <summary>Customers</summary>
@@ -55,7 +61,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Add Customer</summary>
   <p>
 
-  This method add your customer on MaxiPago platform.
+  This method add your customer on MaxiPago API.
   ###### Method:
   * **.addCustomer(*addCustomerJSON*);**
   ###### Params:
@@ -89,7 +95,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
   <summary>Update Customer</summary>
   <p>
 
-  This method update previously added customer on MaxiPago platform.
+  This method update previously added customer on MaxiPago API.
 
   ###### Method:
   * **.updateCustomer(*updateCustomerJSON*);**
@@ -116,7 +122,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Delete Customer</summary>
     <p>
     
-  This method delete previously added customer on MaxiPago platform.
+  This method delete previously added customer on MaxiPago API.
 
   ###### Method:
   * **.deleteCustomer(*deleteCustomerJSON*);**
@@ -143,7 +149,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Add Card</summary>
     <p>
 
-  This method add an card for previously added customer on MaxiPago platform.
+  This method add an card for previously added customer on MaxiPago API.
 
   ###### Method:
   * **.addCard(*addCardJSON*);**
@@ -169,7 +175,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Delete Card</summary>
     <p>
 
-  This method delete an card previously added on MaxiPago platform.
+  This method delete an card previously added on MaxiPago API.
 
   ###### Method:
   * **.deleteCard(*deleteCardJSON*);**
@@ -201,7 +207,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Auth</summary>
       <p>
 
-  This method add an sale authorization for previously card added on MaxiPago platform.
+  This method add an sale authorization for previously card added on MaxiPago API.
 
   ###### Method:
   * **.auth(*authJSON*);**
@@ -263,7 +269,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Capture</summary>
     <p>
 
-  This method capture an sale authorization previously added on MaxiPago platform.
+  This method capture an sale authorization previously added on MaxiPago API.
 
   ###### Method:
   * **.capture(*captureJSON*);**
@@ -289,7 +295,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Void</summary>
     <p>
 
-  This method void an previously capture requested on MaxiPago platform.
+  This method void an previously capture requested on MaxiPago API.
 
   ###### Method:
   * **.void(*voidJSON*);**
@@ -308,7 +314,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Return Payment</summary>
     <p>
 
-  This method return an capture previously requested on MaxiPago platform.
+  This method return an capture previously requested on MaxiPago API.
 
   ###### Method:
   * **.returnPayment(*returnPaymentJSON*);**
@@ -344,7 +350,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Add Recurring Payment</summary>
       <p>
 
-  This method add an recurring payment MaxiPago platform.
+  This method add an recurring payment MaxiPago API.
 
   ###### Method:
   * **.recurringPayment(*recurringPaymentJSON*);**
@@ -462,7 +468,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Update Recurring Payment</summary>
     <p>
 
-  This method update an recurring payment  previously added MaxiPago platform.
+  This method update an recurring payment  previously added MaxiPago API.
 
   ###### Method:
   * **.updateRecurringPayment(*updateRecurringPaymentJSON*);**
@@ -518,7 +524,7 @@ This method build an gateway to make you able to make requests on MaxiPago platf
     <summary>Canceling Recurring Payment</summary>
     <p>
 
-  This method cancel an previously recurring payment added on MaxiPago platform.
+  This method cancel an previously recurring payment added on MaxiPago API.
 
   ###### Method:
   * **.cancelRecurringPayment(*cancelRecurringPaymentJSON*);**
@@ -539,11 +545,11 @@ This method build an gateway to make you able to make requests on MaxiPago platf
 
 # Internal Dependencies
  * **dotenv** - To work with internal environment variables.
- * **moment** - To work correctly with datas and time zones.
- * **xml-js**- To convert JSON to  XML
+ * **moment** - To work correctly with dates and time zones.
+ * **xml-js**- To convert JSON to XML
  * **axios** -  To make MaxiPago Requests.
  * **xml2js** - To convert XML to JSON
- * **faker** - To create fake tests data.
+ * **faker** - To create fake data tests.
 
 ---
 
@@ -563,15 +569,15 @@ This method build an gateway to make you able to make requests on MaxiPago platf
  npm install
 ```
 ##### Testing
-- Make a copy of `.env-example` file and rename it to `.env`
-- Fill in your test MaxiPago settings the `.env` file
+- Make a copy of `.env-example` file and rename it to `.env`.
+- Fill in your test MaxiPago settings in `.env` file.
 - Run the tests with:
 
 ```node
  npm run test
 ```
 
-> :warning:  Warning, the tests make real calls to testapi.maxipago.net with fake data. Be sure you have internet connection, be patient with timeout and be careful with your MaxiPago settings!
+> :warning:  Warning, Running tests will make real requests to [testapi.maxipago.net](testapi.maxipago.net) with fake data. Be sure you have internet connection and be patient with timeout. **Be careful with your MaxiPago settings!**
 
 ## <a name="issue"></a> Found a Bug?
 

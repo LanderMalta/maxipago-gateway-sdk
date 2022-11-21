@@ -29,13 +29,13 @@
     "axios": "^0.21.1",
     "dotenv": "^6.2.0",
     "faker": "^4.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "react-native-xml2js": "^1.0.3",
     "xml-js": "^1.6.11",
     "xml2js": ">=0.4.19"
   },
   "devDependencies": {
-    "mocha": "^9.2.0",
+    "mocha": "^10.1.0",
     "proxyquire": "1.8.0",
     "sinon": "4.1.3"
   }

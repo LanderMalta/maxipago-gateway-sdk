@@ -33,6 +33,7 @@
     "@faker-js/faker": "^8.4.1",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
+    "maxipago-gateway-sdk": "^2.0.0",
     "moment": "^2.30.1",
     "react-native-xml2js": "^1.0.3",
     "vitest": "^2.0.5",

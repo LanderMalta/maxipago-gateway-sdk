@@ -65,7 +65,7 @@ maxipago.Gateway()
 ###### Example:
 
 ```js
-const maxiPagoGateway = maxipago.Gateway(
+const maxiPagoGateway = new maxipago(
   'youmaxipagoid',
   'youmaxipagostrongkey',
   'development',

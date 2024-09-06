@@ -1,1 +1,1 @@
-module.exports = require('./lib/core/maxipago');
+export { default } from './lib/core/maxipago'

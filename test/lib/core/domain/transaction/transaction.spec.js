@@ -1,6 +1,15 @@
 import dotenv from 'dotenv'
 import Gateway from '../../../../../lib/core/maxipago'
-import * as transactionMock from './transactionMock'
+import * as authMock from './mocks/authMock'
+import * as authWithTokenMock from './mocks/authWithTokenMock'
+import * as captureMock from './mocks/captureMock'
+import * as voidMock from './mocks/voidMock'
+import * as saleMock from './mocks/saleMock'
+import * as saleWithFraudcheckMock from './mocks/saleWithFraudcheckMock'
+import * as saleWithTokenMock from './mocks/saleWithTokenMock'
+import * as saleWithTokenAndFraudcheckMock from './mocks/saleWithTokenAndFraudcheckMock'
+import * as returnPaymentMock from './mocks/returnPaymentMock'
+import * as transactionQueryMock from './mocks/transactionQueryMock'
 import { describe, it, expect } from 'vitest'
 import nock from 'nock'
 
@@ -15,11 +24,11 @@ const gateway = new Gateway(merchantId, merchantKey, 'development')
 
 describe('Sale Requests', function () {
   it('should auth transaction', async () => {
-    const auth = transactionMock.fakeAuth()
+    const auth = authMock.fakeAuth()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validAuthXML(merchantId, merchantKey, auth),
+          authMock.validAuthXML(merchantId, merchantKey, auth),
         )
         return true
       })
@@ -29,11 +38,15 @@ describe('Sale Requests', function () {
   })
 
   it('should auth transaction with token', async () => {
-    const auth = transactionMock.fakeAuthWithToken()
+    const auth = authWithTokenMock.fakeAuthWithToken()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validAuthWithTokenXML(merchantId, merchantKey, auth),
+          authWithTokenMock.validAuthWithTokenXML(
+            merchantId,
+            merchantKey,
+            auth,
+          ),
         )
         return true
       })
@@ -43,11 +56,11 @@ describe('Sale Requests', function () {
   })
 
   it('should capture transaction', async () => {
-    const capture = transactionMock.fakeCapture()
+    const capture = captureMock.fakeCapture()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validCaptureXML(merchantId, merchantKey, capture),
+          captureMock.validCaptureXML(merchantId, merchantKey, capture),
         )
         return true
       })
@@ -57,11 +70,11 @@ describe('Sale Requests', function () {
   })
 
   it('should void transaction', async () => {
-    const _void = transactionMock.fakeVoid()
+    const _void = voidMock.fakeVoid()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validVoidXML(merchantId, merchantKey, _void),
+          voidMock.validVoidXML(merchantId, merchantKey, _void),
         )
         return true
       })
@@ -71,11 +84,11 @@ describe('Sale Requests', function () {
   })
 
   it('should sale transaction', async () => {
-    const sale = transactionMock.fakeSale()
+    const sale = saleMock.fakeSale()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validSaleXML(merchantId, merchantKey, sale),
+          saleMock.validSaleXML(merchantId, merchantKey, sale),
         )
         return true
       })
@@ -85,11 +98,11 @@ describe('Sale Requests', function () {
   })
 
   it('should sale with fraudcheck transaction', async () => {
-    const sale = transactionMock.fakeSaleWithFraudcheck()
+    const sale = saleWithFraudcheckMock.fakeSaleWithFraudcheck()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validSaleWithFraudcheckXML(
+          saleWithFraudcheckMock.validSaleWithFraudcheckXML(
             merchantId,
             merchantKey,
             sale,
@@ -103,11 +116,15 @@ describe('Sale Requests', function () {
   })
 
   it('should sale using token transaction', async () => {
-    const sale = transactionMock.fakeSaleWithToken()
+    const sale = saleWithTokenMock.fakeSaleWithToken()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validSaleWithTokenXML(merchantId, merchantKey, sale),
+          saleWithTokenMock.validSaleWithTokenXML(
+            merchantId,
+            merchantKey,
+            sale,
+          ),
         )
         return true
       })
@@ -117,11 +134,11 @@ describe('Sale Requests', function () {
   })
 
   it('should sale using token and fraudcheck transaction', async () => {
-    const sale = transactionMock.fakeSaleWithTokenAndFraudcheck()
+    const sale = saleWithTokenAndFraudcheckMock.fakeSaleWithTokenAndFraudcheck()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validSaleWithTokenAndFraudcheckXML(
+          saleWithTokenAndFraudcheckMock.validSaleWithTokenAndFraudcheckXML(
             merchantId,
             merchantKey,
             sale,
@@ -135,11 +152,11 @@ describe('Sale Requests', function () {
   })
 
   it('should return an captured transaction', async () => {
-    const returnPayment = transactionMock.fakeReturnPayment()
+    const returnPayment = returnPaymentMock.fakeReturnPayment()
     const scope = nock(baseURL)
       .post(postXMLEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validReturnPaymentXML(
+          returnPaymentMock.validReturnPaymentXML(
             merchantId,
             merchantKey,
             returnPayment,
@@ -153,11 +170,11 @@ describe('Sale Requests', function () {
   })
 
   it('should query transaction', async () => {
-    const transactionQuery = transactionMock.fakeTransactionQuery()
+    const transactionQuery = transactionQueryMock.fakeTransactionQuery()
     const scope = nock(baseURL)
       .post(postReportsEndpoint, (body) => {
         expect(body).toEqual(
-          transactionMock.validTransactionQueryXML(
+          transactionQueryMock.validTransactionQueryXML(
             merchantId,
             merchantKey,
             transactionQuery,

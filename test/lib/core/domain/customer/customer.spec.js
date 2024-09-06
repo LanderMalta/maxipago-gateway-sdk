@@ -1,6 +1,9 @@
 import dotenv from 'dotenv'
 import Gateway from '../../../../../lib/core/maxipago'
-import * as customerMock from '../customer/customerMock'
+import * as addBasicCustomerMock from '../customer/mocks/addBasicCustomerMock'
+import * as addFullCustomerMock from '../customer/mocks/addFullCustomerMock'
+import * as updateCustomerMock from '../customer/mocks/updateCustomerMock'
+import * as deleteCustomerMock from '../customer/mocks/deleteCustomerMock'
 import { describe, it, expect } from 'vitest'
 import nock from 'nock'
 
@@ -14,11 +17,11 @@ const gateway = new Gateway(merchantId, merchantKey, 'development')
 
 describe('Customer Requests', function () {
   it('should add customer basic data', async () => {
-    const customer = customerMock.fakeAddBasicCustomerJSON()
+    const customer = addBasicCustomerMock.fakeAddBasicCustomerJSON()
     const scope = nock(baseURL)
       .post(postAPIEndpoint, (body) => {
         expect(body).toEqual(
-          customerMock.validAddBasicCustomerXML(
+          addBasicCustomerMock.validAddBasicCustomerXML(
             merchantId,
             merchantKey,
             customer,
@@ -32,11 +35,11 @@ describe('Customer Requests', function () {
   })
 
   it('should add customer full data', async () => {
-    const customer = customerMock.fakeAddFullCustomerJSON()
+    const customer = addFullCustomerMock.fakeAddFullCustomerJSON()
     const scope = nock(baseURL)
       .post(postAPIEndpoint, (body) => {
         expect(body).toEqual(
-          customerMock.validAddFullCustomerXML(
+          addFullCustomerMock.validAddFullCustomerXML(
             merchantId,
             merchantKey,
             customer,
@@ -50,11 +53,11 @@ describe('Customer Requests', function () {
   })
 
   it('should update customer data', async () => {
-    const customer = customerMock.fakeUpdateCustomerJSON()
+    const customer = updateCustomerMock.fakeUpdateCustomerJSON()
     const scope = nock(baseURL)
       .post(postAPIEndpoint, (body) => {
         expect(body).toEqual(
-          customerMock.validUpdateCustomerXML(
+          updateCustomerMock.validUpdateCustomerXML(
             merchantId,
             merchantKey,
             customer,
@@ -68,11 +71,11 @@ describe('Customer Requests', function () {
   })
 
   it('should delete customer data', async () => {
-    const customer = customerMock.fakeDeleteCustomerJSON()
+    const customer = deleteCustomerMock.fakeDeleteCustomerJSON()
     const scope = nock(baseURL)
       .post(postAPIEndpoint, (body) => {
         expect(body).toEqual(
-          customerMock.validDeleteCustomerXML(
+          deleteCustomerMock.validDeleteCustomerXML(
             merchantId,
             merchantKey,
             customer,

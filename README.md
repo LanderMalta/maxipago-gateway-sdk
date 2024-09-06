@@ -65,7 +65,7 @@ maxipago.Gateway()
 ###### Example:
 
 ```js
-const maxiPagoGateway = new maxipago(
+const gateway = new maxipago(
   'youmaxipagoid',
   'youmaxipagostrongkey',
   'development',
@@ -115,7 +115,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
       dob: '06/26/2018',
       sex: 'M',
     }
-    const maxiPagoJsonResponse = maxiPagoGateway.addCustomer(addCustomerJSON)
+    const response = await gateway.addCustomer(addCustomerJSON)
     ```
 
     </details>
@@ -133,8 +133,6 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 
     - **updateCustomerJSON** = _your updated customer data in JSON format._
 
-    -
-
     ###### Example:
 
     ```js
@@ -144,8 +142,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
       lastName: 'Corwin updated',
       customerId: '119679',
     }
-    const maxiPagoJsonResponse =
-      maxiPagoGateway.updateCustomer(updateCustomerJSON)
+    const response = await gateway.updateCustomer(updateCustomerJSON)
     ```
 
     </details>
@@ -167,8 +164,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 
     ```js
     const deleteCustomerJSON = { customerId: '119679' }
-    const maxiPagoJsonResponse =
-      maxiPagoGateway.deleteCustomer(deleteCustomerJSON)
+    const response = await gateway.deleteCustomer(deleteCustomerJSON)
     ```
 
     </details>
@@ -177,6 +173,45 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 
   - <details>
     <summary style="font-size: 22px; font-weight: bold;">Card</summary>
+
+    - <details>
+      <summary style="font-size: 18px; font-weight: bold;">Zero Dollar</summary>
+
+      This method zero dollar for an card on MaxiPago API.
+
+      ###### Method:
+
+      - **.zeroDollar(_zeroDollarJSON_)**
+
+      ###### Params:
+
+      - **zeroDollarJSON** = _your zero dollar data in JSON format._
+
+      ###### Example:
+
+      ```js
+      const zeroDollarJSON = {
+        processorID: '1',
+        referenceNum: 'PONumber-000000',
+
+        transactionDetail: {
+          payType: {
+            creditCard: {
+              number: '4111111111111111',
+              expMonth: '12',
+              expYear: '2020',
+              cvvNumber: '999',
+            },
+          },
+        },
+        payment: {
+          chargeTotal: '00.00',
+        },
+      }
+      const response = await gateway.zeroDollar(zeroDollarJSON)
+      ```
+
+      </details>
 
     - <details>
       <summary style="font-size: 18px; font-weight: bold;">Add Card</summary>
@@ -201,7 +236,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
         expirationYear: 2020,
         billingName: 'Corwin',
       }
-      const maxiPagoJsonResponse = maxiPagoGateway.addCard(addCardJSON)
+      const response = await gateway.addCard(addCardJSON)
       ```
 
       </details>
@@ -226,7 +261,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
         customerId: '119722',
         token: '+adHuFvmSms=',
       }
-      const maxiPagoJsonResponse = maxiPagoGateway.deleteCard(deleteCardJSON)
+      const response = await gateway.deleteCard(deleteCardJSON)
       ```
 
       </details>
@@ -274,7 +309,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
             customerToken: '119766',
           },
         }
-        const maxiPagoJsonResponse = maxiPagoGateway.auth(authJSON)
+        const response = await gateway.auth(authJSON)
         ```
 
         You can also request an authorization using card token:
@@ -296,7 +331,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
             chargeTotal: '10.00',
           },
         }
-        const maxiPagoJsonResponse = maxiPagoGateway.auth(authJSON)
+        const response = await gateway.auth(authJSON)
         ```
 
         </details>
@@ -324,7 +359,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
             chargeTotal: '10.00',
           },
         }
-        const maxiPagoJsonResponse = maxiPagoGateway.capture(captureJSON)
+        const response = await gateway.capture(captureJSON)
         ```
 
         </details>
@@ -346,7 +381,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
 
         ```js
         const voidJSON = { transactionID: '2203293' }
-        const maxiPagoJsonResponse = maxiPagoGateway.void(voidJSON)
+        const response = await gateway.void(voidJSON)
         ```
 
         </details>
@@ -375,8 +410,77 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
           },
         }
 
-        const maxiPagoJsonResponse =
-          maxiPagoGateway.returnPayment(returnPaymentJSON)
+        const response = await gateway.returnPayment(returnPaymentJSON)
+        ```
+
+        </details>
+
+      - <details>
+          <summary style="font-size: 18px; font-weight: bold;">Sale</summary>
+
+        This method do an sale on MaxiPago API.
+
+        ###### Method:
+
+        - **.sale(_saleJSON_)**
+
+        ###### Params:
+
+        - **saleJSON** = _your sale data in JSON format._
+
+        ###### Example:
+
+        ```js
+        const saleJSON = {
+          processorID: '1',
+          referenceNum: 'PONumber-000000',
+          transactionDetail: {
+            payType: {
+              creditCard: {
+                number: '4111111111111111',
+                expMonth: '12',
+                expYear: '2020',
+                cvvNumber: '',
+              },
+            },
+          },
+          payment: {
+            currencyCode: 'BRL',
+            chargeTotal: '15.33',
+          },
+          saveOnFile: {
+            customerToken: 'G%WkQ0sJ%3O$gxo2yLGxz!!5#t&jD#P3bR',
+          },
+        }
+
+        const response = await gateway.sale(saleJSON)
+        ```
+
+        </details>
+
+      - <details>
+          <summary style="font-size: 18px; font-weight: bold;">Transaction Query</summary>
+
+        This method query an transaction on MaxiPago API.
+
+        ###### Method:
+
+        - **.transactionQuery(_transactionQueryJSON_)**
+
+        ###### Params:
+
+        - **transactionQueryJSON** = _your return payment data in JSON format._
+
+        ###### Example:
+
+        ```js
+        const transactionQueryJSON = {
+          filterOptions: {
+            transactionId: 2997111,
+          },
+        }
+
+        const response = await gateway.transactionQuery(transactionQueryJSON)
         ```
 
         </details>
@@ -448,8 +552,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
             failureThreshold: '5',
           },
         }
-        const maxiPagoJsonResponse =
-          maxiPagoGateway.recurringPayment(recurringPaymentJSON)
+        const response = await gateway.recurringPayment(recurringPaymentJSON)
         ```
 
         You can request an recurring payment using card token:
@@ -501,8 +604,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
             failureThreshold: '5',
           },
         }
-        const maxiPagoJsonResponse =
-          maxiPagoGateway.recurringPayment(recurringPaymentJSON)
+        const response = await gateway.recurringPayment(recurringPaymentJSON)
         ```
 
         </details>
@@ -559,9 +661,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
             phone: '801.057.6041',
           },
         }
-        const maxiPagoJsonResponse = maxiPagoGateway.void(
-          updateRecurringPaymentJSON,
-        )
+        const response = await gateway.void(updateRecurringPaymentJSON)
         ```
 
         </details>
@@ -585,7 +685,7 @@ According to the [MaxiPago API Docs](http://developers.maxipago.com/apidocs/), t
         const cancelRecurringPaymentJSON = {
           orderID: '0A0104A3:0165A0AC8533:9B78:5B51BACC',
         }
-        const maxiPagoJsonResponse = maxiPagoGateway.cancelRecurringPayment(
+        const response = await gateway.cancelRecurringPayment(
           cancelRecurringPaymentJSON,
         )
         ```

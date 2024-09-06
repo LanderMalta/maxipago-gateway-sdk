@@ -17,9 +17,6 @@ importers:
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
-      maxipago-gateway-sdk:
-        specifier: ^2.0.0
-        version: 2.0.0
       moment:
         specifier: ^2.30.1
         version: 2.30.1
@@ -820,10 +817,6 @@ packages:
   make-dir@4.0.0:
     resolution: {integrity: sha512-hXdUTZYIVOt1Ex//jAQi+wTZZpUpwBj/0QsOzqegb3rGMMeJiSEu5xLHnYfBrRV4RH2+OCSOO95Is/7x1WJ4bw==}
     engines: {node: '>=10'}
-
-  maxipago-gateway-sdk@2.0.0:
-    resolution: {integrity: sha512-kApthr7/YDYiIxz9Y7CKdhfbHCM+vffDr5bsSKw1ffxyB3eEBKH1iRuOh9j9G0b2fmp4IIX4ZIKpGv0LNNPqAw==}
-    engines: {node: '>= 0.10.x'}
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -1868,33 +1861,6 @@ snapshots:
   make-dir@4.0.0:
     dependencies:
       semver: 7.6.3
-
-  maxipago-gateway-sdk@2.0.0:
-    dependencies:
-      '@faker-js/faker': 8.4.1
-      axios: 1.7.7
-      dotenv: 16.4.5
-      moment: 2.30.1
-      react-native-xml2js: 1.0.3
-      vitest: 2.0.5
-      xml-js: 1.6.11
-      xml2js: 0.6.2
-    transitivePeerDependencies:
-      - '@edge-runtime/vm'
-      - '@types/node'
-      - '@vitest/browser'
-      - '@vitest/ui'
-      - debug
-      - happy-dom
-      - jsdom
-      - less
-      - lightningcss
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
 
   merge-stream@2.0.0: {}
 

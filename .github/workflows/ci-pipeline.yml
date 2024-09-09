@@ -14,34 +14,33 @@ jobs:
       MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Install dependencies
-        run: pnpm install
-      - name: Lint code
-        run: pnpm lint
+      - name: Check out code
+        uses: actions/checkout@v3
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+
       - name: Install pnpm
         run: npm install -g pnpm
+
       - name: Install dependencies
         run: pnpm install
-      - name: Run tests
-        run: pnpm test -- --coverage
+
+      - name: Run lint
+        run: pnpm lint:check
+
+      - name: Build
+        run: pnpm build
+
+      - name: Run tests and generate coverage report
+        run: pnpm test:cov
+
       - name: Upload coverage to Codecov
+        if: success()
         uses: codecov/codecov-action@v3
         with:
+          files: coverage/lcov.info
+          name: coverage-report
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/*.json

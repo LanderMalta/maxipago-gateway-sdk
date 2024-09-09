@@ -8,8 +8,9 @@ export default defineConfig({
     exclude: ['node_modules', 'dist'],
 
     coverage: {
-      reporter: ['text', 'json', 'html'],
-      reportsDirectory: 'coverage',
+      provider: 'istanbul',
+      reporter: ['text', 'lcov'],
+      reportsDirectory: './coverage',
     },
   },
 })

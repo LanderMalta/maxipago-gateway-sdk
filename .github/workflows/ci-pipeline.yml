@@ -47,7 +47,7 @@ jobs:
 
   test-coverage:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/develop'
     env:
       MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
       MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}

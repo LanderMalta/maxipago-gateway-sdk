@@ -62,7 +62,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: pnpm install -g pnpm && pnpm install
+        run: npm install -g pnpm && pnpm install
 
       - name: Run tests and generate coverage report
         run: pnpm test:cov

@@ -9,10 +9,6 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    env:
-      MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
-      MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
-
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -22,6 +18,22 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run lint
+        run: pnpm lint
+
+  test:
+    runs-on: ubuntu-latest
+    env:
+      MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
+      MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
+
+    steps:
       - name: Install pnpm
         run: npm install -g pnpm
 

@@ -18,11 +18,8 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
       - name: Install dependencies
-        run: pnpm install
+        run: npm install -g pnpm && pnpm install
 
       - name: Run lint
         run: pnpm lint
@@ -42,17 +39,15 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
       - name: Install dependencies
-        run: pnpm install
+        run: npm install -g pnpm && pnpm install
 
-      - name: Run tests and generate coverage report
+      - name: Run tests
         run: pnpm test
 
   test-coverage:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     env:
       MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
       MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
@@ -66,17 +61,13 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
-
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install -g pnpm && pnpm install
 
       - name: Run tests and generate coverage report
         run: pnpm test:cov
 
       - name: Upload coverage to Codecov
-        if: success()
         uses: codecov/codecov-action@v3
         with:
           files: coverage/lcov.info

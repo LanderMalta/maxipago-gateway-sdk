@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - develop
+      - master
   pull_request:
+
+env:
+  MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
+  MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
+  RUN_INSTALL: ${{ npm install -g pnpm && pnpm install }}
 
 jobs:
   lint:
@@ -19,17 +25,13 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        run: $RUN_INSTALL
 
       - name: Run lint
         run: pnpm lint
 
   test:
     runs-on: ubuntu-latest
-    env:
-      MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
-      MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
-
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -47,10 +49,7 @@ jobs:
 
   test-coverage:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop'
-    env:
-      MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
-      MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
+    if: github.ref == 'refs/heads/master'
 
     steps:
       - name: Check out code

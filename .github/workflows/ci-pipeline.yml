@@ -9,6 +9,10 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    env:
+      MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
+      MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up Node.js

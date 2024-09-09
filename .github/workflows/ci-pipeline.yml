@@ -34,6 +34,9 @@ jobs:
       MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
 
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -45,8 +48,29 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run lint
-        run: pnpm lint
+      - name: Run tests and generate coverage report
+        run: pnpm test
+
+  test-coverage:
+    runs-on: ubuntu-latest
+    env:
+      MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
+      MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Run tests and generate coverage report
         run: pnpm test:cov

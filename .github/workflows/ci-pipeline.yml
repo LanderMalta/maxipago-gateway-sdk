@@ -10,7 +10,9 @@ on:
 env:
   MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
   MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
-  RUN_INSTALL: 'npm install -g pnpm && pnpm install'
+  INSTALL_COMMAND: 'npm install -g pnpm && pnpm install'
+  RUN_TESTS: 'pnpm test'
+  RUN_TEST_COVERAGE: 'pnpm test:cov'
 
 jobs:
   lint:
@@ -25,7 +27,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: ${RUN_INSTALL}
+        run: ${{ env.INSTALL_COMMAND }}
 
       - name: Run lint
         run: pnpm lint
@@ -42,15 +44,14 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        run: ${{ env.INSTALL_COMMAND }}
 
       - name: Run tests
-        run: pnpm test
+        run: ${{ env.RUN_TESTS }}
 
   test-coverage:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -61,10 +62,10 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        run: ${{ env.INSTALL_COMMAND }}
 
       - name: Run tests and generate coverage report
-        run: pnpm test:cov
+        run: ${{ env.RUN_TEST_COVERAGE }}
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3

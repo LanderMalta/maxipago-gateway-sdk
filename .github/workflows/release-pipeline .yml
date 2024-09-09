@@ -1,0 +1,87 @@
+name: Release Pipeline
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+env:
+  MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
+  MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Bump version and generate changelog
+        run: |
+          # Install standard-version
+          pnpm add standard-version --save-dev
+          # Run standard-version to bump version and generate changelog
+          npx standard-version
+
+      - name: Commit version bump and changelog
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add package.json CHANGELOG.md
+          git commit -m "chore(release): $(node -p "require('./package.json').version")"
+          git push origin master
+
+      - name: Create a new tag
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          git tag v$VERSION
+          git push origin v$VERSION
+
+      - name: Publish to GitHub Packages
+        run: |
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to npm
+        run: |
+          npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  test-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install -g pnpm && pnpm install
+
+      - name: Run tests and generate coverage report
+        run: pnpm test:cov
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: coverage/lcov.info
+          name: coverage-report
+          token: ${{ secrets.CODECOV_TOKEN }}

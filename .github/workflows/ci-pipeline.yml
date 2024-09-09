@@ -3,16 +3,11 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - develop
-      - master
-  pull_request:
+      - '**'
 
 env:
   MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
   MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
-  INSTALL_COMMAND: 'npm install -g pnpm && pnpm install'
-  RUN_TESTS: 'pnpm test'
-  RUN_TEST_COVERAGE: 'pnpm test:cov'
 
 jobs:
   lint:
@@ -27,7 +22,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: ${{ env.INSTALL_COMMAND }}
+        run: npm install -g pnpm && pnpm install
 
       - name: Run lint
         run: pnpm lint
@@ -47,29 +42,4 @@ jobs:
         run: ${{ env.INSTALL_COMMAND }}
 
       - name: Run tests
-        run: ${{ env.RUN_TESTS }}
-
-  test-coverage:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: ${{ env.INSTALL_COMMAND }}
-
-      - name: Run tests and generate coverage report
-        run: ${{ env.RUN_TEST_COVERAGE }}
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: coverage/lcov.info
-          name: coverage-report
-          token: ${{ secrets.CODECOV_TOKEN }}
+        run: pnpm test

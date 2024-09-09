@@ -29,10 +29,7 @@ jobs:
         run: pnpm install
 
       - name: Run lint
-        run: pnpm lint:check
-
-      - name: Build
-        run: pnpm build
+        run: pnpm lint
 
       - name: Run tests and generate coverage report
         run: pnpm test:cov

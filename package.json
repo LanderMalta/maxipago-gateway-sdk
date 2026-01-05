@@ -20,7 +20,7 @@
   },
   "main": "./lib/core/maxipago",
   "engines": {
-    "node": ">= 0.10.x"
+    "node": ">=20.19.0"
   },
   "type": "module",
   "scripts": {
@@ -30,25 +30,25 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^10.2.0",
     "axios": "^1.7.7",
-    "dotenv": "^16.4.5",
+    "dotenv": "^17.2.3",
     "moment": "^2.30.1",
     "react-native-xml2js": "^1.0.3",
-    "vitest": "^2.0.5",
+    "vitest": "^4.0.16",
     "xml-js": "^1.6.11",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.9.1",
-    "@vitest/coverage-istanbul": "^2.0.5",
-    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/coverage-istanbul": "^4.0.16",
+    "@vitest/coverage-v8": "^4.0.16",
     "eslint": "^9.9.1",
-    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.2.1",
-    "globals": "^15.9.0",
-    "nock": "^13.5.5",
+    "globals": "^17.0.0",
+    "nock": "^14.0.10",
     "prettier": "^3.3.3",
     "standard-version": "^9.5.0"
   }

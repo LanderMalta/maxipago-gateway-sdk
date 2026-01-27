@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - 'main'
+
+permissions:
+  contents: write
+  packages: write
+
 env:
   MP_TEST_ID: ${{ secrets.MP_TEST_ID }}
   MP_TEST_KEY: ${{ secrets.MP_TEST_KEY }}
@@ -39,28 +44,16 @@ jobs:
 
       - name: Bump version and generate changelog
         run: |
-          pnpm add standard-version --save-dev
-          npx standard-version
+          npx standard-version --releaseCommitMessageFormat "chore(release): {{currentTag}} [skip ci]"
 
-      - name: Create or update tag
+      - name: Push changes and tags
         run: |
           VERSION=$(node -p "require('./package.json').version")
-          git tag -d v$VERSION || true
-          git tag v$VERSION
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-
-      - name: Add and commit changes
-        run: |
-          git add package.json CHANGELOG.md
-          if git diff-index --quiet HEAD; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore(release): $VERSION"
-          fi
-          # Ensure we have the latest remote changes and rebase local commit to avoid push rejection
+          
           git fetch origin main
-          git rebase origin/main || { echo "Rebase failed; aborting" >&2; git rebase --abort || true; exit 1; }
-          git push origin main --tags
+          git rebase origin/main
+          git push origin main --follow-tags
 
       - name: Create GitHub Release
         uses: actions/github-script@v6
@@ -88,19 +81,12 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           if [ -z "$NPM_TOKEN" ]; then
-            echo "Error: NPM_TOKEN secret is not set. Add a valid token to repository secrets as 'NPM_TOKEN'." >&2
+            echo "Error: NPM_TOKEN secret is not set." >&2
             exit 1
           fi
-          # Write token to the npm user config file the runner actually uses (if set),
-          # otherwise fallback to ~/.npmrc. This avoids issues where NPM_CONFIG_USERCONFIG
-          # points to a different file (actions/setup-node can set this).
           NPM_USERCONFIG=${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}
-          echo "Writing token to: $NPM_USERCONFIG"
           printf "//registry.npmjs.org/:_authToken=%s\n" "$NPM_TOKEN" > "$NPM_USERCONFIG"
-          # Show length only for quick debugging (do not print token)
-          echo "NPM token length: " $(wc -c < <(printf "%s" "$NPM_TOKEN"))
-          # Try whoami using explicit registry to avoid ambiguous registry settings
-          npm whoami --registry=https://registry.npmjs.org/ || { echo "NPM_TOKEN invalid or expired. Rotate the token on https://www.npmjs.com/ and update repository secret 'NPM_TOKEN'." >&2; exit 1; }
+          npm whoami --registry=https://registry.npmjs.org/ || { echo "NPM_TOKEN invalid." >&2; exit 1; }
 
       - name: Publish to npm
         run: |

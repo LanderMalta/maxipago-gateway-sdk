@@ -31,25 +31,25 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.2.0",
-    "axios": "^1.13.2",
+    "axios": "^1.13.4",
     "dotenv": "^17.2.3",
     "moment": "^2.30.1",
     "react-native-xml2js": "^1.0.3",
-    "vitest": "^4.0.16",
+    "vitest": "^4.0.18",
     "xml-js": "^1.6.11",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^9.39.2",
-    "@vitest/coverage-istanbul": "^4.0.16",
-    "@vitest/coverage-v8": "^4.0.16",
+    "@vitest/coverage-istanbul": "^4.0.18",
+    "@vitest/coverage-v8": "^4.0.18",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "globals": "^17.0.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^17.2.0",
     "nock": "^14.0.10",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "standard-version": "^9.5.0"
   }
 }

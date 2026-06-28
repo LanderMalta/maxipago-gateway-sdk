@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.5](https://github.com/LanderMalta/maxipago-gateway-sdk/compare/v2.1.4...v2.1.5) (2026-06-28)
+
+### [2.1.4](https://github.com/LanderMalta/maxipago-gateway-sdk/compare/v2.1.3...v2.1.4) (2026-01-27)
+
 ### [2.1.3](https://github.com/LanderMalta/maxipago-gateway-sdk/compare/v2.1.2...v2.1.3) (2026-01-10)
 
 ### [2.1.2](https://github.com/LanderMalta/maxipago-gateway-sdk/compare/v1.0.14...v2.1.2) (2026-01-05)

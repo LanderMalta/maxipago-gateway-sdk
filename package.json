@@ -20,7 +20,7 @@
   },
   "main": "./lib/core/maxipago",
   "engines": {
-    "node": ">=20.19.0"
+    "node": ">=24.0.0"
   },
   "type": "module",
   "scripts": {
